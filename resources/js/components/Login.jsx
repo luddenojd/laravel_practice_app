@@ -7,8 +7,12 @@ const Login = () => {
     password: ''
   })
   return (
-    <div>
-      <h1>hejhej</h1>
+    <div className="login-form">
+      <label for="email">Email</label>
+      <input name="email" type="text" />
+      <label for="password">Lösenord</label>
+      <input name="password" type="text" />
+      <Button variant="contained">Logga in</Button>
     </div>
   );
 };
