@@ -1,0 +1,41 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  input {
+    width: 200px;
+    height: 44px;
+    border: 2px solid $light-grey-2;
+    border-radius: 6px;
+    font-size: large;
+    margin-bottom: 20px;
+  }
+  .login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $dark-grey-2;
+    color: $light-grey-1;
+    width: 200px;
+    height: 44px;
+    border-radius: 6px;
+    border: none;
+  }
+  .registration-button {
+    .registration-link {
+      text-decoration: underline;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    input {
+      width: 300px;
+    }
+    .login-button {
+      width: 300px;
+    }
+  }
+}
