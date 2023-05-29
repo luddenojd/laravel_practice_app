@@ -1,4 +1,4 @@
-.login-form {
+.registration-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@
       background: $light-grey-1;
     }
   }
-  .login-button {
+  .registration-create-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,18 +26,6 @@
     border: none;
     &:hover {
       background: $dark-grey-1;
-    }
-  }
-  .error-message {
-    font-size: 10px;
-    color: red;
-    margin-bottom: 10px;
-  }
-  .registration-button {
-    .registration-link {
-      text-decoration: underline;
-      font-size: 12px;
-      margin-top: 10px;
     }
   }
 

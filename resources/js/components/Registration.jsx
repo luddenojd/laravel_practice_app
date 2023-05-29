@@ -30,7 +30,7 @@ const Registration = () => {
         <p>Lösenord:</p>
         <input onChange={(e) => setPassword(e.target.value)} className="password" type="password" />
       </div>
-        <button onClick={createUser} className="login-button">
+        <button onClick={createUser} className="registration-create-button">
           <p>Skapa användare</p>
         </button>
     </div>

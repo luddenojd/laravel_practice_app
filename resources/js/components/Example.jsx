@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from './Login'
+import App from './App'
+
 function Example() {
     return (
         <div className="container">
@@ -16,7 +18,7 @@ if (document.getElementById('example')) {
 
     Index.render(
         <React.StrictMode>
-            <Example/>
+            <App/>
         </React.StrictMode>
     )
 }
