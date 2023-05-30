@@ -1,0 +1,23 @@
+.movie-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  button {
+    background: $dark-grey-2;
+    color: $light-grey-1;
+    width: 250px;
+    height: 44px;
+    border: none;
+    border-radius: 6px;
+    &.active {
+      border-radius: 6px 6px 0px 0px;
+    }
+  }
+  .info-wrapper {
+    border: 1px solid $dark-grey-2;
+    border-radius: 0px 0px 6px 6px;
+    width: 250px;
+    padding: 5px;
+  }
+}

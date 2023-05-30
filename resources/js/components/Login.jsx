@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import LandingPage from './LandingPage'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [landing, setLanding] = useState(false)
   const [errorEmail, setErrorEmail] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [wrongPasswordOrEmail, setWrongPasswordOrEmail] = useState(false)
@@ -33,7 +31,7 @@ const Login = () => {
             }
           )
           localStorage.setItem('token', response.data.token)
-          setLanding(true)
+          window.location.href = '/';
         } catch (error) {
           console.log(error)
           setWrongPasswordOrEmail(true)
@@ -58,10 +56,6 @@ const Login = () => {
 
   return (
     <div className="login-form">
-      {landing ? (
-        <LandingPage />
-      ) : (
-        <>
           <div>
             <p>Email:</p>
             <input onChange={(e) => setEmail(e.target.value)}  onKeyDown={(e) => handleKey(e)} className="email" type="text" />
@@ -79,8 +73,6 @@ const Login = () => {
           <Link to='/registration' className="registration-button">
             <p className="registration-link">Inte medlem? Registrera ett konto här!</p>
           </Link>
-        </>
-      )}
     </div>
   )
 }

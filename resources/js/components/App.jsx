@@ -1,7 +1,9 @@
-import Example from './Example'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Home from './Home'
 import Registration from './Registration'
 import Menu from './Menu'
-
+import Login from './Login'
 import {
   createBrowserRouter,
   Link,
@@ -22,8 +24,9 @@ function App() {
   const router = createBrowserRouter([
     {
       children: [
-        { element: <Example />, path: '/' },
-        { element: <Registration />, path: '/registration' },
+        { element: <Home />, path: '/' },
+        { element: <Registration />, path: '/registrera' },
+        { element: <Login />, path: '/loggain'}
       ],
       element: <Root />
     }
@@ -33,3 +36,13 @@ function App() {
 }
 
 export default App
+
+if (document.getElementById('app')) {
+  const Index = ReactDOM.createRoot(document.getElementById("app"));
+
+  Index.render(
+      <React.StrictMode>
+          <App/>
+      </React.StrictMode>
+  )
+}

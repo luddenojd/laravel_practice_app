@@ -18,6 +18,6 @@
     </head>
     <body class="antialiased">
         @yield('content')
-        <div id="example"></div>
+        <div id="app"></div>
     </body>
 </html>

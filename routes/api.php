@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\DirectorsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SearchController;
 
 //Public routes
 Route::middleware('api')->post('/login', function (Request $request) {
@@ -23,7 +25,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     ]);
 });
     //Users
-    Route::post('/users', [\App\Http\Controllers\UsersController::class, 'store']);
+    Route::post('/users', [UsersController::class, 'store']);
 
     Route::middleware(['auth:sanctum'])->group(function () {
     // Protected routes
@@ -36,28 +38,32 @@ Route::middleware('api')->post('/login', function (Request $request) {
         return response()->json(['message' => 'Logged out successfully']);
     });
 
+    //User
+    Route::get('/activeuser', [UsersController::class, 'activeUser']);
+    Route::get('/allusers', [UsersController::class, 'index']);
+
     //Actors
-    Route::get('/actors', [\App\Http\Controllers\ActorsController::class, 'index']);
-    Route::post('/actors', [\App\Http\Controllers\ActorsController::class, 'store']);
-    Route::get('/actors/search/{query}', [\App\Http\Controllers\ActorsController::class, 'search']);
-    Route::delete('/actors/{actor}', [\App\Http\Controllers\ActorsController::class, 'destroy']);
-    Route::put('/actors/{actor}/restore', [\App\Http\Controllers\ActorsController::class, 'restore']);
+    Route::get('/actors', [ActorsController::class, 'index']);
+    Route::post('/actors', [ActorsController::class, 'store']);
+    Route::get('/actors/search/{query}', [ActorsController::class, 'search']);
+    Route::delete('/actors/{actor}', [ActorsController::class, 'destroy']);
+    Route::put('/actors/{actor}/restore', [ActorsController::class, 'restore']);
 
     //Movies
-    Route::get('/movies', [\App\Http\Controllers\MoviesController::class, 'index']);
-    Route::post('/movies', [\App\Http\Controllers\MoviesController::class, 'store']);
-    Route::get('/movies/search/{query}', [\App\Http\Controllers\MoviesController::class, 'search']);
-    Route::get('/movies/filter', [\App\Http\Controllers\MoviesController::class, 'filter']);
-    Route::delete('/movies/{movie}', [\App\Http\Controllers\MoviesController::class, 'destroy']);
-    Route::put('/movies/{movie}/restore', [\App\Http\Controllers\MoviesController::class, 'restore']);
+    Route::get('/movies', [MoviesController::class, 'index']);
+    Route::post('/movies', [MoviesController::class, 'store']);
+    Route::get('/movies/search/{query}', [MoviesController::class, 'search']);
+    Route::get('/movies/filter', [MoviesController::class, 'filter']);
+    Route::delete('/movies/{movie}', [MoviesController::class, 'destroy']);
+    Route::put('/movies/{movie}/restore', [MoviesController::class, 'restore']);
 
     //Directors
-    Route::get('/directors', [\App\Http\Controllers\DirectorsController::class, 'index']);
-    Route::post('/directors', [\App\Http\Controllers\DirectorsController::class, 'store']);
-    Route::get('/directors/search/{query}', [\App\Http\Controllers\DirectorsController::class, 'search']);
-    Route::delete('/directors/{director}', [\App\Http\Controllers\DirectorsController::class, 'destroy']);
-    Route::put('/directors/{director}/restore', [\App\Http\Controllers\DirectorsController::class, 'restore']);
+    Route::get('/directors', [DirectorsController::class, 'index']);
+    Route::post('/directors', [DirectorsController::class, 'store']);
+    Route::get('/directors/search/{query}', [DirectorsController::class, 'search']);
+    Route::delete('/directors/{director}', [DirectorsController::class, 'destroy']);
+    Route::put('/directors/{director}/restore', [DirectorsController::class, 'restore']);
 
     //Search
-    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search']);
+    Route::get('/search', [SearchController::class, 'search']);
 });

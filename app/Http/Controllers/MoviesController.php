@@ -16,7 +16,10 @@ class MoviesController extends Controller
     {
         $user = $request->user();
         $movies = $user->movies()->with(['actors', 'directors'])->get();
-        return response()->json($movies);
+        return response()->json([
+            'user' => $user,
+            'movies' => $movies,
+        ]);
     }
 
     public function filter(Request $request)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { GrClose } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 
 const Menu = () => {
@@ -9,12 +10,17 @@ const Menu = () => {
       {isOpen
           ?
         <div className="main-menu">
-          <Link to="/">Alla filmer</Link>
-          <Link to="/registration">Registrera</Link>
-          <Link to="/mymovies">Mina filmer</Link>
+          <div className="closing-wrapper">
+            <button onClick={() => setIsOpen(!isOpen)} >
+              <GrClose />
+            </button>
+          </div>
+          <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">Alla filmer</Link>
+          <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/registrera">Registrera</Link>
+          <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/loggain">Logga in</Link>
         </div>
           :
-        <button>
+        <button onClick={() => setIsOpen(!isOpen)}>
           <GiHamburgerMenu />
         </button>
       }
