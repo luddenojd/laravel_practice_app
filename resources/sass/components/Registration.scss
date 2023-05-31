@@ -29,6 +29,12 @@
     }
   }
 
+  .error-message {
+    font-size: 10px;
+    color: red;
+    margin-bottom: 10px;
+  }
+
   @media screen and (min-width: 768px) {
     input {
       width: 300px;

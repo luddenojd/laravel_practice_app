@@ -22,6 +22,13 @@ class MoviesController extends Controller
         ]);
     }
 
+    public function getAllMovies()
+    {
+        $movies = Movies::with(['actors', 'directors'])->get();
+
+        return response()->json($movies);
+    }
+
     public function filter(Request $request)
     {
         $query = Movies::with(['actors', 'directors']);

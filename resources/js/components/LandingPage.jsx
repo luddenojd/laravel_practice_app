@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Movie from './Movie'
+import Logout from './Logout'
+import Login from './Login'
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({})
 
-  const testAuth = async () => {
+  const getAuthenticatedContent = async () => {
     const token = getToken()
     if (token) {
       try {
@@ -33,12 +35,12 @@ const LandingPage = () => {
   }
 
   useEffect(() => {
-    testAuth()
+    getAuthenticatedContent()
     const tokenInterval = setInterval(() => {
       const token = getToken()
       if (token) {
         clearInterval(tokenInterval)
-        testAuth()
+        getAuthenticatedContent()
       }
     }, 100);
 
@@ -56,37 +58,43 @@ const LandingPage = () => {
     }
   }, [])
 
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem('token')
+  // const handleLogout = async () => {
+  //   try {
+  //     const token = localStorage.getItem('token')
 
-      await axios.post('http://localhost:8000/api/logout', null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
-      localStorage.removeItem('token')
-      window.location.href = '/'
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     await axios.post('http://localhost:8000/api/logout', null, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       withCredentials: true,
+  //     });
+  //     localStorage.removeItem('token')
+  //     window.location.href = '/'
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   return (
     <div>
       {loggedIn ?
       <>
-    <button onClick={handleLogout} className="logout-button">
+      <h1>Välkommen {user.name}!</h1>
+    {/* <button onClick={handleLogout} className="logout-button">
       Logga ut
-    </button>
+    </button> */}
+      <Logout />
       <h1>Mina filmer</h1>
       {movies?.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
-      <p>Välkommen {user.name}!</p>
+
       </> :
-      <h1>Du är inte inloggad</h1> }
+      <>
+        <h1>Du är inte inloggad</h1>
+        <Login />
+      </>
+      }
 
     </div>
   );

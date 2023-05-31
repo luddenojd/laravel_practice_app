@@ -50,6 +50,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::put('/actors/{actor}/restore', [ActorsController::class, 'restore']);
 
     //Movies
+    Route::get('/allmovies', [MoviesController::class, 'getAllMovies']);
     Route::get('/movies', [MoviesController::class, 'index']);
     Route::post('/movies', [MoviesController::class, 'store']);
     Route::get('/movies/search/{query}', [MoviesController::class, 'search']);

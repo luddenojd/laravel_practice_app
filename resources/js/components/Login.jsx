@@ -58,19 +58,29 @@ const Login = () => {
     <div className="login-form">
           <div>
             <p>Email:</p>
-            <input onChange={(e) => setEmail(e.target.value)}  onKeyDown={(e) => handleKey(e)} className="email" type="text" />
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => handleKey(e)}
+              className="email"
+              type="text"
+            />
             {errorEmail && <p className="error-message">Ange en giltig mailadress</p>}
           </div>
           <div>
             <p>Lösenord:</p>
-            <input onChange={(e) => setPassword(e.target.value)}  onKeyDown={(e) => handleKey(e)} className="password" type="password" />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => handleKey(e)}
+              className="password"
+              type="password"
+            />
             {errorPassword && <p className="error-message">Ange ett giltigt lösenord</p>}
           </div>
           {wrongPasswordOrEmail && <p className="error-message">Fel mailadress eller lösenord, var vänlig kontrollera och försök igen</p>}
           <button onClick={postLogin} className="login-button">
             <p>Logga in</p>
           </button>
-          <Link to='/registration' className="registration-button">
+          <Link to='/registrera' className="registration-button">
             <p className="registration-link">Inte medlem? Registrera ett konto här!</p>
           </Link>
     </div>
