@@ -22,7 +22,7 @@ const Logout = () => {
   return (
     <div>
       <button onClick={handleLogout} className="logout-button">
-        Logga ut
+        <h1>Logga ut</h1>
       </button>
     </div>
   );

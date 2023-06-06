@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Actors;
 use App\Models\Movies;
 use App\Models\Directors;
+use App\Models\Genres;
 
 class SearchController extends Controller
 {
@@ -22,11 +23,15 @@ class SearchController extends Controller
         // Search in Directors
         $directors = Directors::with('movies')->where('name', 'LIKE', '%' . $query . '%')->get();
 
+        //Search in Genres
+        $genres = Genres::with('movies')->where('title', 'LIKE', '%' . $query . '%')->get();
+
         return response()->json([
             'success' => true,
             'actors' => $actors,
             'movies' => $movies,
-            'directors' => $directors
+            'directors' => $directors,
+            'genres' => $genres
         ]);
     }
 }

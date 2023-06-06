@@ -3,11 +3,13 @@ import axios from 'axios'
 import Movie from './Movie'
 import Logout from './Logout'
 import Login from './Login'
+import ClipLoader from "react-spinners/ClipLoader"
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({})
+  const [loading, setLoading] = useState(true)
 
   const getAuthenticatedContent = async () => {
     const token = getToken()
@@ -19,11 +21,12 @@ const LandingPage = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data)
         setMovies(response.data.movies)
         setUser(response.data.user)
       } catch (error) {
         console.log(error)
+      } finally {
+        setLoading(false)
       }
     } else {
       console.log('Token not found')
@@ -58,46 +61,31 @@ const LandingPage = () => {
     }
   }, [])
 
-  // const handleLogout = async () => {
-  //   try {
-  //     const token = localStorage.getItem('token')
-
-  //     await axios.post('http://localhost:8000/api/logout', null, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       withCredentials: true,
-  //     });
-  //     localStorage.removeItem('token')
-  //     window.location.href = '/'
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   return (
-    <div>
+    <div className="landingpage-wrapper">
       {loggedIn ?
       <>
+
+      {loading ? <ClipLoader />
+      :
+      <>
       <h1>Välkommen {user.name}!</h1>
-    {/* <button onClick={handleLogout} className="logout-button">
-      Logga ut
-    </button> */}
-      <Logout />
-      <h1>Mina filmer</h1>
+      <h4>Mina filmer</h4>
       {movies?.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
+      </>
+      }
 
-      </> :
+      </>
+      :
       <>
-        <h1>Du är inte inloggad</h1>
         <Login />
       </>
       }
 
     </div>
-  );
-};
+  )
+}
 
 export default LandingPage

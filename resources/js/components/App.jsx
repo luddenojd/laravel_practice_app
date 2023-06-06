@@ -4,6 +4,7 @@ import Home from './Home'
 import Registration from './Registration'
 import Menu from './Menu'
 import Login from './Login'
+import AllMovies from './AllMovies'
 import {
   createBrowserRouter,
   Link,
@@ -26,7 +27,8 @@ function App() {
       children: [
         { element: <Home />, path: '/' },
         { element: <Registration />, path: '/registrera' },
-        { element: <Login />, path: '/loggain'}
+        { element: <Login />, path: '/loggain'},
+        { element: <AllMovies />, path: '/allafilmer'}
       ],
       element: <Root />
     }

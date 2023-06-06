@@ -20,5 +20,15 @@
     border-radius: 0px 0px 6px 6px;
     width: 250px;
     padding: 5px;
+
+    .favorite-button {
+      display: flex;
+      align-items: center;
+      width: 150px;
+      border: none;
+      background-color: transparent;
+      color: $dark-grey-2;
+      justify-content: space-between;
+    }
   }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\DirectorsController;
+use App\Http\Controllers\GenresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SearchController;
 
@@ -48,6 +49,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::get('/actors/search/{query}', [ActorsController::class, 'search']);
     Route::delete('/actors/{actor}', [ActorsController::class, 'destroy']);
     Route::put('/actors/{actor}/restore', [ActorsController::class, 'restore']);
+    Route::post('/movies/{movieId}/actors/{actorId}', [ActorsController::class, 'addActorToMovie']);
 
     //Movies
     Route::get('/allmovies', [MoviesController::class, 'getAllMovies']);
@@ -57,6 +59,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::get('/movies/filter', [MoviesController::class, 'filter']);
     Route::delete('/movies/{movie}', [MoviesController::class, 'destroy']);
     Route::put('/movies/{movie}/restore', [MoviesController::class, 'restore']);
+    Route::post('/users/{userId}/movies/{movieId}', [MoviesController::class, 'addMovieToUser']);
 
     //Directors
     Route::get('/directors', [DirectorsController::class, 'index']);
@@ -64,6 +67,9 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::get('/directors/search/{query}', [DirectorsController::class, 'search']);
     Route::delete('/directors/{director}', [DirectorsController::class, 'destroy']);
     Route::put('/directors/{director}/restore', [DirectorsController::class, 'restore']);
+
+    //Genres
+    Route::post('/genres/{genreId}/movies/{movieId}', [GenresController::class, 'addGenreToMovie']);
 
     //Search
     Route::get('/search', [SearchController::class, 'search']);

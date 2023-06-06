@@ -32,6 +32,12 @@ class ActorsController extends Controller
         ]);
     }
 
+    public function addActorToMovie($movieId, $actorId)
+    {
+        $actor = Actors::find($actorId);
+        $actor->movies()->attach($movieId);
+    }
+
     public function show(Actors $actor)
     {
         return response()->json([

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('release_year')->nullable();
-            $table->string('genre');
             $table->string('rating');
             $table->timestamps();
         });

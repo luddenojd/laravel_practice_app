@@ -1,4 +1,16 @@
 .menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .movie-clapper {
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .burger-menu {
+    margin-top: 20px;
+    margin-right: 10px;
+  }
   .main-menu {
     display: flex;
     flex-direction: column;

@@ -18,11 +18,16 @@ class Movies extends Model
 
     public function actors()
     {
-        return $this->belongsToMany(Actors::class, 'movieactors', 'movie_id', 'actor_id');
+        return $this->belongsToMany(Actors::class, 'movie_actors', 'movie_id', 'actor_id');
     }
 
     public function directors()
     {
         return $this->belongsToMany(Directors::class, 'movie_directors', 'movie_id', 'director_id');
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genres::class, 'movie_genres', 'movie_id', 'genre_id');
     }
 }

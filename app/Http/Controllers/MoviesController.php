@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movies;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
@@ -15,23 +16,32 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $movies = $user->movies()->with(['actors', 'directors'])->get();
+        $movies = $user->movies()->with(['actors', 'directors', 'genres'])->get();
         return response()->json([
             'user' => $user,
             'movies' => $movies,
         ]);
     }
 
-    public function getAllMovies()
-    {
-        $movies = Movies::with(['actors', 'directors'])->get();
+    public function getAllMovies(Request $request)
+    {   $user = $request->user();
+        $movies = Movies::with(['actors', 'directors', 'genres'])->get();
 
-        return response()->json($movies);
+        return response()->json([
+            'user' => $user,
+            'movies' => $movies,
+        ]);
+    }
+
+    public function addMovieToUser($userId, $movieId)
+    {
+        $user = User::find($userId);
+        $user->movies()->attach($movieId);
     }
 
     public function filter(Request $request)
     {
-        $query = Movies::with(['actors', 'directors']);
+        $query = Movies::with(['actors', 'directors', 'genres']);
 
         if ($request->has('release_year_min') && $request->has('release_year_max')) {
             $minYear = intval($request->input('release_year_min'));
@@ -43,10 +53,6 @@ class MoviesController extends Controller
             $minRating = floatval($request->input('rating_min'));
             $maxRating = floatval($request->input('rating_max'));
             $query->whereBetween('rating', [$minRating, $maxRating]);
-        }
-
-        if ($request->has('genre')) {
-            $query->where('genre', '=', $request->input('genre'));
         }
 
         $movies = $query->get();
@@ -65,13 +71,10 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
         $movie = new Movies();
         $movie->title = $request->input('title');
         $movie->release_year = $request->input('release_year');
-        $movie->genre = $request->input('genre');
         $movie->rating = $request->input('rating');
-        $movie->user_id = $user->id; // Set the user_id to the current user's id
         $movie->save();
 
         return response()->json([
@@ -102,7 +105,6 @@ class MoviesController extends Controller
     {
         $movie->title = $request->input('title');
         $movie->release_year = $request->input('release_year');
-        $movie->genre = $request->input('genre');
         $movie->rating = $request->input('rating');
         $movie->save();
 
