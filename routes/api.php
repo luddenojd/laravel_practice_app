@@ -72,5 +72,5 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::post('/genres/{genreId}/movies/{movieId}', [GenresController::class, 'addGenreToMovie']);
 
     //Search
-    Route::get('/search', [SearchController::class, 'search']);
+    Route::post('/search', [SearchController::class, 'search']);
 });

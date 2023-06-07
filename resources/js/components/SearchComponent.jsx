@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const SearchComponent = () => {
   const [query, setQuery] = useState('')
 
-  const goFind = () => {
-    console.log(query)
+  const goFind = async () => {
+    if(query !== '') {
+      try {
+        const response = await axios.post('http://localhost:8000/api/search', {
+          query: query
+        },
+        {
+          withCredentials: true,
+        })
+
+      } catch (error) {
+
+      }
+    }
   }
 
-  const handleKey = () => {
+  const handleKey = (e) => {
     if(e.key === "Enter") {
       goFind()
     }

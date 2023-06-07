@@ -1,6 +1,16 @@
 .search-wrapper {
   margin-bottom: 20px;
   .input-wrapper {
-
+    input {
+      width: 250px;
+      height: 44px;
+      border: 2px solid $light-grey-2;
+      border-radius: 6px;
+      font-size: large;
+      margin-bottom: 20px;
+      &:hover {
+        background: $light-grey-1;
+      }
+    }
   }
 }

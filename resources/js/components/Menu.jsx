@@ -33,15 +33,20 @@ const Menu = () => {
           ?
         <div className="main-menu">
           <div className="closing-wrapper">
+            <IconContext.Provider value={{ color: "#495057", size: "40px" }}>
             <button onClick={() => setIsOpen(!isOpen)} >
               <GrClose />
             </button>
+            </IconContext.Provider>
           </div>
-          <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">Mina filmer</Link>
-          <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/allafilmer">Alla filmer</Link>
+
 
           {loggedIn ?
+          <>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">Mina filmer</Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/allafilmer">Alla filmer</Link>
            <Logout />
+           </>
            :
            <>
            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/registrera">Registrera</Link>
@@ -51,7 +56,7 @@ const Menu = () => {
 
         </div>
           :
-          <IconContext.Provider value={{ size: "40px", className: "global-class-name" }}>
+          <IconContext.Provider value={{ color: "#495057", size: "40px", className: "global-class-name" }}>
         <button className="burger-menu" onClick={() => setIsOpen(!isOpen)}>
           <GiHamburgerMenu />
         </button>
