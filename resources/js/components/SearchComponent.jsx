@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const SearchComponent = () => {
+const SearchComponent = ({ setMovies, getAllMovies }) => {
   const [query, setQuery] = useState('')
 
   const goFind = async () => {
-    if(query !== '') {
-      try {
-        const response = await axios.post('http://localhost:8000/api/search', {
-          query: query
-        },
-        {
-          withCredentials: true,
-        })
+    const token = getToken()
+    if(token) {
+      if(query !== '') {
+        try {
+          const response = await axios.get('http://localhost:8000/api/search', {
+            params: {
+              query: query
+            },
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          setMovies(response.data.movies)
 
-      } catch (error) {
+        } catch (error) {
 
+        }
       }
     }
+  }
+
+  const getToken = () => {
+    return localStorage.getItem('token')
   }
 
   const handleKey = (e) => {
@@ -25,6 +36,12 @@ const SearchComponent = () => {
       goFind()
     }
   }
+
+  useEffect(() => {
+    if(query === "") {
+      getAllMovies()
+    }
+  }, [query])
 
   return (
     <div className="search-wrapper">

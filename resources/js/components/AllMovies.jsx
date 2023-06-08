@@ -19,7 +19,7 @@ const AllMovies = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
+        console.log(response.data)
         setMovies(response.data.movies)
         setUser(response.data.user)
       } catch (error) {
@@ -42,14 +42,18 @@ const AllMovies = () => {
   return (
     <div className="all-movies-wrapper">
       <h1>Alla filmer</h1>
-      <SearchComponent />
-      {loading ? <ClipLoader />
+      <SearchComponent
+        setMovies={setMovies}
+        getAllMovies={getAllMovies}
+      />
+      {loading
+      ?
+      <ClipLoader />
       :
       (movies?.map((movie) => (
         <Movie key={movie.id} user={user} movie={movie} />
       )))
       }
-
     </div>
   )
 }

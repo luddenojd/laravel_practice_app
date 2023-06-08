@@ -15,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function movies(): BelongsToMany
     {
-        return $this->belongsToMany(Movies::class, 'movie_users', 'user_id', 'movie_id');
+        return $this->belongsToMany(Movies::class, 'movie_users', 'user_id', 'movie_id')->withPivot('is_favorite');
     }
 
 

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use ActorsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,10 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(GenreSeeder::class);
-        $this->call(MovieTableSeeder::class);
+        $this->call(MoviesTableSeeder::class);
         $this->call(ActorsSeeder::class);
         $this->call(DirectorsSeeder::class);
         $this->call(UsersSeeder::class);
-
     }
 }

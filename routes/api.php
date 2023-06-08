@@ -60,6 +60,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::delete('/movies/{movie}', [MoviesController::class, 'destroy']);
     Route::put('/movies/{movie}/restore', [MoviesController::class, 'restore']);
     Route::post('/users/{userId}/movies/{movieId}', [MoviesController::class, 'addMovieToUser']);
+    Route::put('/users/{userId}/movies/{movieId}', [MoviesController::class, 'deleteMovieFromUser']);
 
     //Directors
     Route::get('/directors', [DirectorsController::class, 'index']);
@@ -72,5 +73,5 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::post('/genres/{genreId}/movies/{movieId}', [GenresController::class, 'addGenreToMovie']);
 
     //Search
-    Route::post('/search', [SearchController::class, 'search']);
+    Route::get('/search', [SearchController::class, 'search']);
 });

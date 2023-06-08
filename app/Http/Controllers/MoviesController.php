@@ -24,8 +24,18 @@ class MoviesController extends Controller
     }
 
     public function getAllMovies(Request $request)
-    {   $user = $request->user();
-        $movies = Movies::with(['actors', 'directors', 'genres'])->get();
+    {
+        $user = $request->user();
+        $loggedInUserId = $user ? $user->id : null;
+
+        $movies = Movies::with(['actors', 'directors', 'genres', 'users' => function ($query) use ($loggedInUserId) {
+            $query->where('user_id', $loggedInUserId)->select('movie_users.is_favorite');
+        }])->get();
+
+        $movies = $movies->map(function ($movie) {
+            $movie->is_favorite = $movie->users->isNotEmpty() ? $movie->users[0]->pivot->is_favorite : false;
+            return $movie;
+        });
 
         return response()->json([
             'user' => $user,
@@ -36,7 +46,37 @@ class MoviesController extends Controller
     public function addMovieToUser($userId, $movieId)
     {
         $user = User::find($userId);
-        $user->movies()->attach($movieId);
+        $existingMovies = $user->movies()->pluck('movies.id')->toArray();
+
+        if (!in_array($movieId, $existingMovies)) {
+            $user->movies()->attach($movieId, ['is_favorite' => true]);
+
+            $attachedMovie = $user->movies()->where('movies.id', $movieId)->first();
+            $isFavorite = $attachedMovie ? $attachedMovie->pivot->is_favorite : null;
+
+            return response()->json([
+                'message' => 'Movie added to user',
+                'is_favorite' => $isFavorite,
+            ], 200);
+        }
+    }
+
+    public function deleteMovieFromUser($userId, $movieId)
+    {
+        $user = User::find($userId);
+        $existingMovies = $user->movies()->pluck('movies.id')->toArray();
+
+        if (in_array($movieId, $existingMovies)) {
+            $user->movies()->detach($movieId);
+            $user->movies()->updateExistingPivot($movieId, ['is_favorite' => false]);
+
+            $updatedMovie = $user->movies()->find($movieId);
+            $isFavorite = $updatedMovie ? $updatedMovie->pivot->is_favorite : null;
+
+            return response()->json(['message' => 'Movie deleted from user', 'is_favorite' => $isFavorite], 200);
+        }
+
+        return response()->json(['message' => 'Movie not found or not associated with the user'], 404);
     }
 
     public function filter(Request $request)
