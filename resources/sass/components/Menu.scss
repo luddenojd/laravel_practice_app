@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .desktop-menu {
+    display: none;
+  }
   .movie-clapper {
     width: 50px;
     margin-top: 10px;
@@ -29,5 +32,22 @@
         font-size: 25px;
       }
 
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .menu-wrapper {
+    .burger-menu {
+      display: none;
+    }
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+      .route-links {
+        font-size: 25px;
+      }
+    }
   }
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import ClipLoader from "react-spinners/ClipLoader"
 
-const Movie = ({ movie, user }) => {
+const Movie = ({ movie, user, setMovies }) => {
   const [moreInfo, setMoreInfo] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
 
@@ -37,7 +38,6 @@ const Movie = ({ movie, user }) => {
   const deleteMovieFromUser = async (movieId, movieFavorite) => {
     let userId = user.id.toString()
     let movieIdString = movieId.toString()
-
     const token = getToken()
     if(token) {
       try {
@@ -49,8 +49,8 @@ const Movie = ({ movie, user }) => {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log(response)
         setIsFavorite(response.data.is_favorite)
+        setMovies(response.data.new_movies)
       } catch (error) {
         console.log(error)
       }
@@ -66,15 +66,15 @@ const Movie = ({ movie, user }) => {
   return (
     <div className="movie-wrapper">
       <button className={moreInfo ? 'active' : ''} onClick={() => setMoreInfo(!moreInfo)}>
-       <p>{movie.title}</p>
+       <p>{movie?.title}</p>
       </button>
       {moreInfo &&
         <div className="info-wrapper">
-          <p>{movie.genres.length > 1 ? 'Genres: ' : 'Genre: '}{movie.genres?.map((genre) => (
+          <p>{movie?.genres?.length > 1 ? 'Genres: ' : 'Genre: '}{movie.genres?.map((genre) => (
             ` ${genre.title}`
           ))}</p>
-          <p>Utgivningsår: {movie.release_year}</p>
-          <p>Betyg IMDB: {movie.rating}</p>
+          <p>Utgivningsår: {movie?.release_year}</p>
+          <p>Betyg IMDB: {movie?.rating}</p>
               {isFavorite
               ?
               <button className="favorite-button" onClick={() => deleteMovieFromUser(movie.id, movie.is_favorite)}>

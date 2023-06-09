@@ -8,7 +8,7 @@
     background: $dark-grey-2;
     color: $light-grey-1;
     width: 250px;
-    height: 44px;
+    min-height: 44px;
     border: none;
     border-radius: 6px;
     &.active {
@@ -24,7 +24,7 @@
     .favorite-button {
       display: flex;
       align-items: center;
-      width: 150px;
+      width: 80px;
       border: none;
       background-color: transparent;
       color: $dark-grey-2;

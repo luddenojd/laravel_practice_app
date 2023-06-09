@@ -18,6 +18,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Movies::class, 'movie_users', 'user_id', 'movie_id')->withPivot('is_favorite');
     }
 
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id');
+    }
+
+    public function friendRequests()
+    {
+        return $this->hasMany(Friend::class, 'user_id');
+    }
+
 
     /**
      * The attributes that are mass assignable.

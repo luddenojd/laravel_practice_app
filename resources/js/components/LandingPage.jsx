@@ -45,11 +45,15 @@ const LandingPage = () => {
         clearInterval(tokenInterval)
         getAuthenticatedContent()
       }
-    }, 100);
+    }, 100)
 
     return () => {
       clearInterval(tokenInterval)
     }
+  }, [])
+
+  useEffect(() => {
+    getAuthenticatedContent()
   }, [])
 
   useEffect(() => {
@@ -72,7 +76,12 @@ const LandingPage = () => {
       <h1>Välkommen {user.name}!</h1>
       <h4>Mina filmer</h4>
       {movies?.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
+        <Movie
+        key={movie.id}
+        movie={movie}
+        user={user}
+        setMovies={setMovies}
+         />
       ))}
       </>
       }

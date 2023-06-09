@@ -25,10 +25,23 @@ const Menu = () => {
 
   return (
     <div className="menu-wrapper">
-      {!isOpen &&
+            {!isOpen &&
            <img src={movieClapper} className="movie-clapper" alt="movie-clapper" />
            }
-
+      <div className="desktop-menu">
+      {loggedIn ?
+          <>
+            <Link className="route-links" to="/">Mina filmer</Link>
+            <Link className="route-links" to="/allafilmer">Alla filmer</Link>
+           <Logout />
+           </>
+           :
+           <>
+           <Link  className="route-links" to="/registrera">Registrera</Link>
+           <Link className="route-links" to="/loggain">Logga in</Link>
+           </>
+           }
+      </div>
       {isOpen
           ?
         <div className="main-menu">

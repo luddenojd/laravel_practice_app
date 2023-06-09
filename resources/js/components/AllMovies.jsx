@@ -8,6 +8,7 @@ const AllMovies = () => {
   const [movies, setMovies] = useState([])
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   const getAllMovies = async () => {
     const token = getToken()
@@ -45,13 +46,22 @@ const AllMovies = () => {
       <SearchComponent
         setMovies={setMovies}
         getAllMovies={getAllMovies}
+        setError={setError}
       />
       {loading
       ?
       <ClipLoader />
       :
+      error !== ''
+      ?
+      <h4>{error}</h4>
+      :
       (movies?.map((movie) => (
-        <Movie key={movie.id} user={user} movie={movie} />
+        <Movie
+          key={movie.id}
+          user={user}
+          movie={movie}
+        />
       )))
       }
     </div>

@@ -16,7 +16,17 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $movies = $user->movies()->with(['actors', 'directors', 'genres'])->get();
+        $movies = $user->movies()
+            ->with(['actors', 'directors', 'genres', 'users' => function ($query) use ($user) {
+                $query->where('user_id', $user->id)->select('movie_users.is_favorite');
+            }])
+            ->get();
+
+        $movies = $movies->map(function ($movie) {
+            $movie->is_favorite = $movie->users->isNotEmpty() ? $movie->users[0]->pivot->is_favorite : false;
+            return $movie;
+        });
+
         return response()->json([
             'user' => $user,
             'movies' => $movies,
@@ -72,8 +82,9 @@ class MoviesController extends Controller
 
             $updatedMovie = $user->movies()->find($movieId);
             $isFavorite = $updatedMovie ? $updatedMovie->pivot->is_favorite : null;
+            $newMovies = $user->movies()->get();
 
-            return response()->json(['message' => 'Movie deleted from user', 'is_favorite' => $isFavorite], 200);
+            return response()->json(['message' => 'Movie deleted from user', 'is_favorite' => $isFavorite, 'new_movies' => $newMovies], 200);
         }
 
         return response()->json(['message' => 'Movie not found or not associated with the user'], 404);
