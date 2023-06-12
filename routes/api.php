@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\DirectorsController;
+use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SearchController;
@@ -71,6 +72,12 @@ Route::middleware('api')->post('/login', function (Request $request) {
 
     //Genres
     Route::post('/genres/{genreId}/movies/{movieId}', [GenresController::class, 'addGenreToMovie']);
+
+    //Friends
+    Route::post('/acceptFriendRequest', [FriendsController::class, 'acceptFriendRequest']);
+    Route::post('/sendFriendRequest', [FriendsController::class, 'sendFriendRequest']);
+    Route::get('/friends', [FriendsController::class, 'index']);
+    Route::get('/myFriends', [FriendsController::class, 'myFriends']);
 
     //Search
     Route::get('/search', [SearchController::class, 'search']);

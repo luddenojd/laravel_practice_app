@@ -33,6 +33,7 @@ const Menu = () => {
           <>
             <Link className="route-links" to="/">Mina filmer</Link>
             <Link className="route-links" to="/allafilmer">Alla filmer</Link>
+            <Link className="route-links" to="/vanner">Mina vänner</Link>
            <Logout />
            </>
            :
@@ -58,6 +59,7 @@ const Menu = () => {
           <>
             <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">Mina filmer</Link>
             <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/allafilmer">Alla filmer</Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/vanner">Mina vänner</Link>
            <Logout />
            </>
            :

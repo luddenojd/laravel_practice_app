@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import Home from './Home'
 import Registration from './Registration'
 import Menu from './Menu'
 import Login from './Login'
 import AllMovies from './AllMovies'
+import Friends from './Friends'
 import {
   createBrowserRouter,
   Link,
@@ -28,7 +29,8 @@ function App() {
         { element: <Home />, path: '/' },
         { element: <Registration />, path: '/registrera' },
         { element: <Login />, path: '/loggain'},
-        { element: <AllMovies />, path: '/allafilmer'}
+        { element: <AllMovies />, path: '/allafilmer'},
+        { element: <Friends />, path: '/vanner'}
       ],
       element: <Root />
     }
