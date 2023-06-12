@@ -20,7 +20,6 @@ const AllMovies = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response.data)
         setMovies(response.data.movies)
         setUser(response.data.user)
       } catch (error) {

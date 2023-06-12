@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import FriendRequests from './FriendRequests'
 
 const Friends = () => {
   const [friends, setFriends] = useState([])
@@ -17,7 +19,6 @@ const Friends = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
         setFriends(response.data)
       } catch (error) {
         console.log(error)
@@ -35,6 +36,8 @@ const Friends = () => {
       {friends?.map((friend) => (
         <p key={friend.id}>{friend.name}</p>
       ))}
+      <p>Vänförfrågningar</p>
+      <FriendRequests />
     </div>
   )
 }

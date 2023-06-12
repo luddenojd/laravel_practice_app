@@ -78,6 +78,7 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::post('/sendFriendRequest', [FriendsController::class, 'sendFriendRequest']);
     Route::get('/friends', [FriendsController::class, 'index']);
     Route::get('/myFriends', [FriendsController::class, 'myFriends']);
+    Route::get('/myFriendRequests', [FriendsController::class, 'myFriendRequests']);
 
     //Search
     Route::get('/search', [SearchController::class, 'search']);

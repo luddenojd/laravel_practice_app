@@ -24,6 +24,18 @@ class FriendsController extends Controller
         return response()->json($friends);
     }
 
+    public function myFriendRequests()
+    {
+        $user = Auth::user();
+        $friendRequests = Friend::where('friend_id', $user->id)
+            ->with('user')
+            ->join('users', 'friends.user_id', '=', 'users.id')
+            ->select('friends.*', 'users.name as friend_name')
+            ->get();
+
+        return response()->json($friendRequests);
+    }
+
     public function acceptFriendRequest(Request $request)
     {
         $user = Auth::user();
@@ -40,8 +52,12 @@ class FriendsController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Add the friend to the user's friends
+        // Create a new friendship entry for the authenticated user
         $user->friends()->attach($friendRequest->user_id);
+
+        // Create a new friendship entry for the friend being added
+        $friend = User::find($friendRequest->user_id);
+        $friend->friends()->attach($user->id);
 
         // Delete the friend request
         $friendRequest->delete();
