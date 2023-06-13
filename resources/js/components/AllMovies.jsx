@@ -55,13 +55,15 @@ const AllMovies = () => {
       ?
       <h4>{error}</h4>
       :
-      (movies?.map((movie) => (
+      <div className="movies-container">
+      {movies?.map((movie) => (
         <Movie
           key={movie.id}
           user={user}
           movie={movie}
         />
-      )))
+      ))}
+      </div>
       }
     </div>
   )

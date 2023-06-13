@@ -75,6 +75,7 @@ const LandingPage = () => {
       <>
       <h1>Välkommen {user.name}!</h1>
       <h4>Mina filmer</h4>
+      <div className="movies-container">
       {movies?.map((movie) => (
         <Movie
         key={movie.id}
@@ -83,6 +84,8 @@ const LandingPage = () => {
         setMovies={setMovies}
          />
       ))}
+      </div>
+
       </>
       }
 

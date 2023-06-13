@@ -89,6 +89,7 @@ const Movie = ({ movie, user, setMovies }) => {
               }
         </div>
       }
+
     </div>
   )
 }

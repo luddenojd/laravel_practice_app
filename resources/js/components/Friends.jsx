@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import FriendRequests from './FriendRequests'
+import ClipLoader from "react-spinners/ClipLoader"
 
 const Friends = () => {
   const [friends, setFriends] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -20,6 +22,7 @@ const Friends = () => {
           }
         })
         setFriends(response.data)
+        setLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -32,11 +35,18 @@ const Friends = () => {
 
 
   return (
-    <div>
+    <div className="friends-wrapper">
+      <h4>Dina vänner</h4>
+      {loading
+      ?
+      <ClipLoader />
+      :
+      <>
       {friends?.map((friend) => (
         <p key={friend.id}>{friend.name}</p>
       ))}
-      <p>Vänförfrågningar</p>
+      </>
+      }
       <FriendRequests />
     </div>
   )

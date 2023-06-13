@@ -25,18 +25,39 @@ const FriendRequests = () => {
     }
   }
 
+  const acceptFriendRequest = async (friendRequestId) => {
+    const token = getToken()
+    if(token) {
+      try {
+        const response = await axios.post('http://localhost:8000/api/acceptFriendRequest',
+        {
+          friend_request_id: friendRequestId
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      } catch (error) {
+
+      }
+    }
+  }
+
   useEffect(() => {
     getFriendRequests()
   }, [])
 
 
   return (
-    <div>
+    <div className="friend-req-wrapper">
+      <h4>Vänförfrågningar</h4>
       {friendRequests.length ? (friendRequests?.map((req) => (
-        <div>
+        <div className="accept-box">
         <p key={req.id}>{req.friend_name} har skickat en vänförfrågan till dig!</p>
-        <div>
-          <button>
+        <div className="button-wrapper">
+          <button onClick={() => acceptFriendRequest(req.id)}>
             <p>Acceptera</p>
           </button>
           <button>

@@ -12,3 +12,13 @@
     margin-bottom: 20px;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .movies-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    min-height: 600px;
+    margin-top: 25px;
+    gap: 10px;
+  }
+}
