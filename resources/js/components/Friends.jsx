@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import FriendRequests from './FriendRequests'
 import ClipLoader from "react-spinners/ClipLoader"
+import ProfilePage from './ProfilePage'
 
 const Friends = () => {
   const [friends, setFriends] = useState([])
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState({})
+  const [profile, setProfile] = useState(false)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -33,21 +36,29 @@ const Friends = () => {
     getMyFriends()
   }, [])
 
+  const showProfile = (friend) => {
+    setProfile(true)
+    setUser(friend)
+  }
+
 
   return (
     <div className="friends-wrapper">
-      <h4>Dina vänner</h4>
-      {loading
-      ?
-      <ClipLoader />
-      :
-      <>
-      {friends?.map((friend) => (
-        <p key={friend.id}>{friend.name}</p>
-      ))}
-      </>
-      }
-      <FriendRequests />
+      {loading ? (
+        <ClipLoader />
+      ) : profile ? (
+        <ProfilePage user={user} />
+      ) : (
+        <>
+          <h4>Dina vänner</h4>
+          {friends?.map((friend) => (
+            <button onClick={() => showProfile(friend)}>
+              <p key={friend.id}>{friend.name}</p>
+            </button>
+          ))}
+          <FriendRequests />
+        </>
+      )}
     </div>
   )
 }

@@ -33,6 +33,7 @@ const Menu = () => {
           <>
             <Link className="route-links" to="/">Mina filmer</Link>
             <Link className="route-links" to="/allafilmer">Alla filmer</Link>
+            <Link className="route-links" to="/anvandare">Alla användare</Link>
             <Link className="route-links" to="/vanner">Mina vänner</Link>
            <Logout />
            </>
@@ -79,7 +80,7 @@ const Menu = () => {
 
       }
     </div>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu
