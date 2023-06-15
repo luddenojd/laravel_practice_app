@@ -74,7 +74,14 @@ const LandingPage = () => {
       :
       <>
       <h1>Välkommen {user.name}!</h1>
+      {movies.length
+      ?
       <h4>Mina filmer</h4>
+      :
+      <p>Du har inga filmer att visa för tillfället.</p>
+      }
+
+
       <div className="movies-container">
       {movies?.map((movie) => (
         <Movie
@@ -85,13 +92,15 @@ const LandingPage = () => {
          />
       ))}
       </div>
-
       </>
       }
 
       </>
       :
       <>
+        <p>Välkommen till filmdatabasen!</p>
+        <p>Var vänlig logga in eller skapa ett konto för att ta del av innehållet.</p>
+
         <Login />
       </>
       }

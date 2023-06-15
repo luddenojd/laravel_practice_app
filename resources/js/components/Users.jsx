@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import ClipLoader from "react-spinners/ClipLoader"
+import ProfilePage from './ProfilePage'
+import { AiOutlineUser } from 'react-icons/ai'
 
 const Users = () => {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState({})
+  const [profile, setProfile] = useState(false)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -19,6 +25,7 @@ const Users = () => {
           }
         })
         setUsers(response.data)
+        setLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -44,21 +51,36 @@ const Users = () => {
     }
   }
 
+  const showProfile = (friend) => {
+    setProfile(true)
+    setUser(friend)
+  }
+
   useEffect(() => {
     getAllUsers()
   }, [])
 
   return (
-    <div>
-      <p>Användare</p>
+    <div className="allusers-wrapper">
+      {loading
+      ?
+      <ClipLoader />
+      :
+      profile
+      ?
+      <ProfilePage setProfile={setProfile} user={user} />
+      :
+      <div className="button-wrapper">
+      <p>Användare:</p>
       {users?.map((user) => (
-        <>
-          <p>{user.name}</p>
-          <button onClick={() => sendFriendRequest(user.id)}>
-            <p>Skicka vänförfrågan till {user.name}?</p>
-          </button>
-        </>
+        <button onClick={() => showProfile(user)}>
+          <AiOutlineUser />
+          <p key={user.id}>{user.name}</p>
+        </button>
       ))}
+      </div>
+      }
+
     </div>
   )
 }

@@ -47,7 +47,7 @@ const Friends = () => {
       {loading ? (
         <ClipLoader />
       ) : profile ? (
-        <ProfilePage user={user} />
+        <ProfilePage setProfile={setProfile} user={user} />
       ) : (
         <>
           <h4>Dina vänner</h4>
@@ -56,7 +56,7 @@ const Friends = () => {
               <p key={friend.id}>{friend.name}</p>
             </button>
           ))}
-          <FriendRequests />
+          <FriendRequests  />
         </>
       )}
     </div>

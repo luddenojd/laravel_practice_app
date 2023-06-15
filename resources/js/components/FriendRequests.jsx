@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import ClipLoader from "react-spinners/ClipLoader"
 
 const FriendRequests = () => {
   const [friendRequests, setFriendRequests] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [friendAdded, setFriendAdded] = useState(false)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -18,6 +21,7 @@ const FriendRequests = () => {
           }
         })
         setFriendRequests(response.data)
+        setLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -38,6 +42,7 @@ const FriendRequests = () => {
             Authorization: `Bearer ${token}`
           }
         })
+        setFriendAdded(true)
       } catch (error) {
 
       }
@@ -52,9 +57,12 @@ const FriendRequests = () => {
   return (
     <div className="friend-req-wrapper">
       <h4>Vänförfrågningar</h4>
-      {friendRequests.length ? (friendRequests?.map((req) => (
-        <div className="accept-box">
-        <p key={req.id}>{req.friend_name} har skickat en vänförfrågan till dig!</p>
+      {loading ?
+      <ClipLoader />
+      :
+      friendRequests.length ? (friendRequests?.map((req) => (
+        <div key={req.id} className="accept-box">
+        <p>{req.friend_name} har skickat en vänförfrågan till dig!</p>
         <div className="button-wrapper">
           <button onClick={() => acceptFriendRequest(req.id)}>
             <p>Acceptera</p>

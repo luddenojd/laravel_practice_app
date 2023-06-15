@@ -1,0 +1,42 @@
+.back-button-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  button {
+    .back-info {
+      display: none;
+    }
+  }
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 300px;
+  min-width: 300px;
+  button {
+    display: flex;
+    align-items: center;
+    p {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (min-width:768px) {
+  .back-button-container {
+    button {
+      display: flex;
+      align-items: center;
+      .back-info {
+        display: block;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+    }
+  }
+}

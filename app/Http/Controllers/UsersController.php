@@ -10,7 +10,9 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $activeUser = Auth::user();
+
+        $users = User::where('id', '!=', $activeUser->id)->get();
 
         return response()->json($users);
     }
