@@ -31,6 +31,7 @@ const ProfilePage = ({ user, setProfile }) => {
       }
     }
   }
+  console.log(user)
 
   return (
     <>

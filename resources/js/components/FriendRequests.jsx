@@ -20,6 +20,7 @@ const FriendRequests = () => {
             Authorization: `Bearer ${token}`
           }
         })
+        console.log(response.data)
         setFriendRequests(response.data)
         setLoading(false)
       } catch (error) {
@@ -27,7 +28,7 @@ const FriendRequests = () => {
       }
     }
   }
-
+//fix this shit
   const acceptFriendRequest = async (friendRequestId) => {
     const token = getToken()
     if(token) {
@@ -42,6 +43,7 @@ const FriendRequests = () => {
             Authorization: `Bearer ${token}`
           }
         })
+        setFriendRequests(response.data)
         setFriendAdded(true)
       } catch (error) {
 
@@ -51,8 +53,7 @@ const FriendRequests = () => {
 
   useEffect(() => {
     getFriendRequests()
-  }, [])
-
+  }, [friendAdded])
 
   return (
     <div className="friend-req-wrapper">
@@ -60,8 +61,11 @@ const FriendRequests = () => {
       {loading ?
       <ClipLoader />
       :
-      friendRequests.length ? (friendRequests?.map((req) => (
+      friendRequests ? (friendRequests?.map((req) => (
         <div key={req.id} className="accept-box">
+        {req.status === 'pending'
+        ?
+        <>
         <p>{req.friend_name} har skickat en vänförfrågan till dig!</p>
         <div className="button-wrapper">
           <button onClick={() => acceptFriendRequest(req.id)}>
@@ -71,6 +75,15 @@ const FriendRequests = () => {
             <p>Neka</p>
           </button>
         </div>
+        </>
+        :
+        req.status === 'accepted'
+        ?
+        <p>Vänförfrågan beviljad!</p>
+        :
+        ''
+        }
+
         </div>
       )))
       :

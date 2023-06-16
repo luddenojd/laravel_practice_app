@@ -24,6 +24,7 @@ const Users = () => {
             Authorization: `Bearer ${token}`
           }
         })
+        console.log(response.data)
         setUsers(response.data)
         setLoading(false)
       } catch (error) {

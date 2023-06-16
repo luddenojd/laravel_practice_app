@@ -12,7 +12,9 @@ class UsersController extends Controller
     {
         $activeUser = Auth::user();
 
-        $users = User::where('id', '!=', $activeUser->id)->get();
+        $users = User::where('id', '!=', $activeUser->id)
+            ->with('friendRequests') // Include the "friends" relationship
+            ->get();
 
         return response()->json($users);
     }

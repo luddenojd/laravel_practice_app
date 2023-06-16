@@ -33,6 +33,12 @@ class FriendsController extends Controller
             ->select('friends.*', 'users.name as friend_name')
             ->get();
 
+        // Update the status for each friend request
+        $friendRequests->each(function ($friendRequest) {
+            $friend = Friend::find($friendRequest->id);
+            $friendRequest->status = $friend->status;
+        });
+
         return response()->json($friendRequests);
     }
 
@@ -52,6 +58,10 @@ class FriendsController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
+        // Update the status column to 'accepted'
+        $friendRequest->status = 'accepted';
+        $friendRequest->save();
+
         // Create a new friendship entry for the authenticated user
         $user->friends()->attach($friendRequest->user_id);
 
@@ -59,10 +69,7 @@ class FriendsController extends Controller
         $friend = User::find($friendRequest->user_id);
         $friend->friends()->attach($user->id);
 
-        // Delete the friend request
-        $friendRequest->delete();
-
-        return response()->json(['message' => 'Friend request accepted successfully'], 200);
+        return response()->json(['message' => 'Friend request accepted successfully', 'status' => $friendRequest->status], 200);
     }
 
     public function sendFriendRequest(Request $request)
