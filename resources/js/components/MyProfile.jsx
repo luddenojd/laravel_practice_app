@@ -9,6 +9,7 @@ const MyProfile = ({ user }) => {
   const [profilePic, setProfilePic] = useState(user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png')
   const [editPicture, setEditPicture] = useState(false)
   const [editName, setEditName] = useState(false)
+  const [editAge, setEditAge] = useState(false)
   const [name, setName] = useState(user.name)
   const [birthdate, setBirthdate] = useState(user.birthdate)
   const [description, setDescription] = useState(user.description)
@@ -109,7 +110,6 @@ const MyProfile = ({ user }) => {
             </button>
           }
         </div>
-
       }
       {editPicture
         &&
@@ -142,7 +142,14 @@ const MyProfile = ({ user }) => {
         </button>
       </div>
       }
-      <p>Född: {birthdate}</p>
+      <div className="edit-name">
+        <p>{birthdate}</p>
+        <button onClick={() => setEditAge(!editAge)}>
+          <IconContext.Provider value={{ color: "#495057", size: "20px" }}>
+            <AiOutlineEdit />
+          </IconContext.Provider>
+        </button>
+      </div>
       <p>Medlem sedan {user.created_at.slice(0, 10)}</p>
       <p>{description}</p>
     </div>
