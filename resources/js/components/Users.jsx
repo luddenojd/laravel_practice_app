@@ -9,10 +9,29 @@ const Users = () => {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState({})
   const [profile, setProfile] = useState(false)
+  const [activeUser, setActiveUser] = useState({})
 
   const getToken = () => {
     return localStorage.getItem('token')
   }
+
+  const getActiveUser = async () => {
+    const token = getToken()
+    if(token) {
+      try {
+        const response = await axios.get('http://localhost:8000/api/activeuser', {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        setActiveUser(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
 
   const getAllUsers = async () => {
     const token = getToken()
@@ -59,6 +78,7 @@ const Users = () => {
 
   useEffect(() => {
     getAllUsers()
+    getActiveUser()
   }, [])
 
   return (
@@ -69,7 +89,7 @@ const Users = () => {
       :
       profile
       ?
-      <ProfilePage setProfile={setProfile} user={user} />
+      <ProfilePage setProfile={setProfile} user={user} activeUser={activeUser} />
       :
       <div className="button-wrapper">
       <p>Användare:</p>

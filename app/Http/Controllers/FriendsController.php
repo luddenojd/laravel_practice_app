@@ -18,8 +18,13 @@ class FriendsController extends Controller
 
     public function myFriends()
     {
-        $user = Auth::user();
-        $friends = $user->friends;
+        $activeUser = Auth::user();
+        $friends = $activeUser->friends;
+
+        $friends = $friends->map(function ($friend) use ($activeUser) {
+            $friend->friends = true;
+            return $friend;
+        });
 
         return response()->json($friends);
     }
@@ -27,7 +32,10 @@ class FriendsController extends Controller
     public function myFriendRequests()
     {
         $user = Auth::user();
-        $friendRequests = Friend::where('friend_id', $user->id)
+        $friendRequests = Friend::where(function ($query) use ($user) {
+                $query->where('friend_id', $user->id)
+                    ->orWhere('user_id', $user->id);
+            })
             ->with('user')
             ->join('users', 'friends.user_id', '=', 'users.id')
             ->select('friends.*', 'users.name as friend_name')

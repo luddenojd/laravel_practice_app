@@ -20,7 +20,6 @@ const FriendRequests = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response.data)
         setFriendRequests(response.data)
         setLoading(false)
       } catch (error) {
@@ -28,7 +27,7 @@ const FriendRequests = () => {
       }
     }
   }
-//fix this shit
+
   const acceptFriendRequest = async (friendRequestId) => {
     const token = getToken()
     if(token) {
@@ -43,7 +42,7 @@ const FriendRequests = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        setFriendRequests(response.data)
+        // setFriendRequests(Object.values(response.data))
         setFriendAdded(true)
       } catch (error) {
 
@@ -77,17 +76,17 @@ const FriendRequests = () => {
         </div>
         </>
         :
-        req.status === 'accepted'
+        friendAdded
         ?
         <p>Vänförfrågan beviljad!</p>
         :
-        ''
+        <p>Du har inga vänförfrågningar</p>
         }
 
         </div>
       )))
       :
-      <p>Du har inga vänförfrågningar</p>
+      ''
     }
     </div>
   )

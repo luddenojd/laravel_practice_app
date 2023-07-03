@@ -4,6 +4,7 @@ import Movie from './Movie'
 import Logout from './Logout'
 import Login from './Login'
 import ClipLoader from "react-spinners/ClipLoader"
+import MyProfile from './MyProfile'
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([])
@@ -72,17 +73,15 @@ const LandingPage = () => {
 
       {loading ? <ClipLoader />
       :
-      <>
-      <h1>Välkommen {user.name}!</h1>
-      {movies.length
+      <div className="movie-profile-wrapper">
+      <MyProfile user={user} />
+      <div className="movies-container">
+      {/* {movies.length
       ?
       <h4>Mina filmer</h4>
       :
       <p>Du har inga filmer att visa för tillfället.</p>
-      }
-
-
-      <div className="movies-container">
+      } */}
       {movies?.map((movie) => (
         <Movie
         key={movie.id}
@@ -92,7 +91,7 @@ const LandingPage = () => {
          />
       ))}
       </div>
-      </>
+      </div>
       }
 
       </>

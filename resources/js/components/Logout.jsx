@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import { AiOutlineLogout } from 'react-icons/ai'
+import { IconContext } from "react-icons"
 
 const Logout = () => {
 
@@ -23,9 +25,12 @@ const Logout = () => {
     <div>
       <button onClick={handleLogout} className="logout-button">
         <h1>Logga ut</h1>
+        <IconContext.Provider value={{ color: "white", size: "25px" }}>
+          <AiOutlineLogout />
+        </IconContext.Provider>
       </button>
     </div>
-  );
-};
+  )
+}
 
 export default Logout;

@@ -9,9 +9,29 @@ import { IconContext } from "react-icons"
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
+  const [userName, setUserName] = useState('')
 
   const getToken = () => {
     return localStorage.getItem('token')
+  }
+
+  const getAuthenticatedContent = async () => {
+    const token = getToken()
+    if (token) {
+      try {
+        const response = await axios.get('http://localhost:8000/api/movies', {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUserName(response.data.user.name)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      console.log('Token not found')
+    }
   }
 
   useEffect(() => {
@@ -23,6 +43,11 @@ const Menu = () => {
     }
   }, [])
 
+  useEffect(() => {
+    getAuthenticatedContent()
+  }, [])
+
+
   return (
     <div className="menu-wrapper">
       <div className="desktop-menu">
@@ -33,7 +58,7 @@ const Menu = () => {
            <img src={movieClapper} className="movie-clapper" alt="movie-clapper" />
            }
             </Link>
-            <Link className="route-links" to="/">Mina filmer</Link>
+            <Link className="route-links" to="/">{userName}</Link>
             <Link className="route-links" to="/allafilmer">Alla filmer</Link>
             <Link className="route-links" to="/anvandare">Alla användare</Link>
             <Link className="route-links" to="/vanner">Mina vänner</Link>

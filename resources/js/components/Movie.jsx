@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import ClipLoader from "react-spinners/ClipLoader"
+import { IconContext } from "react-icons"
 
 const Movie = ({ movie, user, setMovies }) => {
   const [moreInfo, setMoreInfo] = useState(false)
@@ -78,12 +79,16 @@ const Movie = ({ movie, user, setMovies }) => {
               {isFavorite
               ?
               <button className="favorite-button" onClick={() => deleteMovieFromUser(movie.id, movie.is_favorite)}>
-                <AiFillHeart />
+                 <IconContext.Provider value={{ color: "#495057", size: "25px" }}>
+                  <AiFillHeart />
+                </IconContext.Provider>
                 <p>Sparad</p>
               </button>
               :
               <button className="favorite-button" onClick={() => addMovieToUser(movie.id, movie.is_favorite)}>
-                <AiOutlineHeart />
+                                 <IconContext.Provider value={{ color: "#495057", size: "25px" }}>
+                  <AiOutlineHeart />
+                </IconContext.Provider>
                 <p>Spara</p>
               </button>
               }

@@ -43,6 +43,8 @@ Route::middleware('api')->post('/login', function (Request $request) {
     //User
     Route::get('/activeuser', [UsersController::class, 'activeUser']);
     Route::get('/allusers', [UsersController::class, 'index']);
+    Route::put('/updateuser/{id}', [UsersController::class, 'update']);
+    Route::post('/user/{id}/update-profile-picture', [UsersController::class, 'update'])->name('user.update');
 
     //Actors
     Route::get('/actors', [ActorsController::class, 'index']);

@@ -49,6 +49,12 @@
         font-size: 20px;
         color: white;
       }
+      .logout-button {
+        display: flex;
+        width: 108px;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 }

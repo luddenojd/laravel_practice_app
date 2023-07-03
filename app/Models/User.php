@@ -25,7 +25,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function friendRequests()
     {
-        return $this->hasMany(Friend::class, 'user_id');
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id')
+            ->wherePivot('status', 'pending');
+    }
+
+    public function getProfilePictureUrlAttribute()
+    {
+        if ($this->profile_pic) {
+            return asset('storage/' . $this->profile_pic);
+        }
+        // Return a default profile picture URL if no picture is set
+        return asset('path/to/default/profile-picture.jpg');
     }
 
 
@@ -38,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'profile_pic',
+        'bg_color',
+        'font_color',
+        'birthdate',
+        'description'
     ];
 
     /**
