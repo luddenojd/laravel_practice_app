@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ClipLoader from "react-spinners/ClipLoader"
+import { BsImageFill } from 'react-icons/bs'
+import { AiOutlineEdit } from 'react-icons/ai'
+import { IconContext } from "react-icons"
 
 const MyProfile = ({ user }) => {
   const [profilePic, setProfilePic] = useState(user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png')
   const [editPicture, setEditPicture] = useState(false)
+  const [editName, setEditName] = useState(false)
   const [name, setName] = useState(user.name)
   const [birthdate, setBirthdate] = useState(user.birthdate)
   const [description, setDescription] = useState(user.description)
@@ -34,6 +38,8 @@ const MyProfile = ({ user }) => {
             Authorization: `Bearer ${token}`
           }
         })
+        setName(response.data.name)
+        setEditName(false)
       } catch (error) {
         console.log(error)
       }
@@ -66,6 +72,17 @@ const MyProfile = ({ user }) => {
     }
   }
 
+  const handleKey = (e) => {
+    if(e.key === "Enter") {
+      updateInfo()
+    }
+  }
+
+  const cancelEdit = () => {
+    setName(name.length ? name : user.name)
+    setEditName(false)
+  }
+
   useEffect(() => {
     if(profilePic !== null) {
       updateProfilePic()
@@ -78,30 +95,56 @@ const MyProfile = ({ user }) => {
 
   return (
     <div className="my-profile-wrapper">
-      {editPicture
-          ?
-          <>
-          <input type="file" onChange={handleFileUpload} />
-          <button>
-            <p onClick={() => setEditPicture(false)}>Avbryt</p>
-          </button>
-          </>
-          :
-          <button onClick={() => setEditPicture(true)}>
-            <p>Ändra profilbild</p>
-          </button>
-      }
       {loading
         ?
         <ClipLoader />
         :
-        <img className="profile-pic" src={`storage/${profilePic}`} alt="Profile image" />
-      }
+        <div className="profile-pic-frame">
+          <img className="profile-pic" src={`storage/${profilePic}`} alt="Profile image" />
+          {!editPicture &&
+            <button className="change-pic-button" onClick={() => setEditPicture(true)}>
+              <IconContext.Provider value={{ color: "black", size: "25px" }}>
+                <BsImageFill />
+              </IconContext.Provider>
+            </button>
+          }
+        </div>
 
-      <h1>{user.name}</h1>
-      <p>{user.birthdate}</p>
-      <p>Medlem sedan {user.created_at}</p>
-      <p>{user.description}</p>
+      }
+      {editPicture
+        &&
+        <div className="uploader">
+        <input type="file" onChange={handleFileUpload} />
+        <button onClick={() => setEditPicture(false)}>
+          <p>Avbryt</p>
+        </button>
+        </div>
+      }
+      <div className="edit-name">
+        <h1>{name}</h1>
+        <button onClick={() => setEditName(!editName)}>
+          <IconContext.Provider value={{ color: "#495057", size: "20px" }}>
+            <AiOutlineEdit />
+          </IconContext.Provider>
+        </button>
+      </div>
+      {editName &&
+      <div className="edit-button-wrapper">
+        <input type="text"
+        onChange={(e) => setName(e.target.value)}
+        onKeyDown={(e) => handleKey(e)}
+        />
+        <button className="save-button" onClick={updateInfo}>
+          Spara
+        </button>
+        <button className="cancel-button" onClick={cancelEdit}>
+          <p>Avbryt</p>
+        </button>
+      </div>
+      }
+      <p>Född: {birthdate}</p>
+      <p>Medlem sedan {user.created_at.slice(0, 10)}</p>
+      <p>{description}</p>
     </div>
   )
 }

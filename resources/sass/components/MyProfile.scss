@@ -1,6 +1,80 @@
 .my-profile-wrapper {
-  .profile-pic {
-    max-width: 250px;
-    max-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 350px;
+  .edit-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 180px;
+    justify-content: space-between;
+    h1 {
+      margin: 0;
+    }
+  }
+  .edit-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    input {
+      height: 34px;
+      border: 2px solid $light-grey-2;
+      border-radius: 6px;
+      margin-bottom: 7px;
+      margin-top: 7px;
+    }
+    .cancel-button {
+      text-align: left;
+      p {
+        text-decoration: underline;
+      }
+    }
+    .save-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $dark-grey-2;
+      color: $light-grey-1;
+      width: 100px;
+      height: 34px;
+      border-radius: 6px;
+      border: none;
+    }
+  }
+
+  .uploader {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    button {
+      p {
+        text-decoration: underline;
+      }
+    }
+  }
+  .profile-pic-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    .change-pic-button {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+    .profile-pic {
+      max-width: 250px;
+      max-height: 250px;
+    }
+  }
+
+}
+
+@media screen and (min-width: 768px) {
+  .my-profile-wrapper {
+
   }
 }
