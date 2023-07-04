@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const ProfilePage = ({ user, setProfile, activeUser }) => {
   const [addedFriend, setAddedFriend] = useState(false)
-
   const [status, setStatus] = useState([])
   const [friendRequests, setFriendRequests] = useState([])
 
@@ -69,10 +68,13 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
       console.error("An error occurred:", error)
     }
   }
-console.log(status)
   return (
     <>
-      <div className="back-button-container">
+      <div style={{background: user.bg_color}} className="profile-wrapper">
+        {/* <IconContext.Provider value={{ color: "#495057", size: "50px" }}>
+          <AiOutlineUser />
+        </IconContext.Provider> */}
+        <div className="back-button-container">
         <button onClick={() => setProfile(false)}>
         <IconContext.Provider value={{ color: "#495057", size: "25px" }}>
           <AiOutlineArrowLeft />
@@ -80,11 +82,8 @@ console.log(status)
         </IconContext.Provider>
         </button>
       </div>
-      <div className="profile-wrapper">
-        <IconContext.Provider value={{ color: "#495057", size: "50px" }}>
-          <AiOutlineUser />
-        </IconContext.Provider>
-        <p>Namn: {user.name}</p>
+        <img className="profile-pic" src={`storage/${user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png'}`} alt="" />
+        <p>{user.name}</p>
         <p>E-mail: {user.email}</p>
         {addedFriend || status.includes('pending')
         ?

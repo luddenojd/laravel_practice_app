@@ -43,7 +43,6 @@ const Users = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response.data)
         setUsers(response.data)
         setLoading(false)
       } catch (error) {
@@ -97,7 +96,6 @@ const Users = () => {
         <button onClick={() => showProfile(user)}>
           <AiOutlineUser />
           <p key={user.id}>{user.name}</p>
-          <img style={{width: '100px'}} src={`storage/${user.profile_pic}`} alt="" />
         </button>
       ))}
       </div>

@@ -9,6 +9,7 @@
     align-items: center;
     width: 180px;
     justify-content: space-between;
+    margin-bottom: 10px;
     h1 {
       margin: 0;
     }
@@ -70,6 +71,33 @@
     .profile-pic {
       max-width: 250px;
       max-height: 250px;
+    }
+  }
+
+  .change-bg-color {
+    display: flex;
+    flex-direction: column;
+    height: 107px;
+    justify-content: space-evenly;
+    select {
+      width: 150px;
+      height: 34px;
+      border-radius: 6px;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $dark-grey-2;
+      color: $light-grey-1;
+      width: 150px;
+      height: 34px;
+      border-radius: 6px;
+      border: none;
+      padding: 3px;
+      p {
+        font-size: 14px;
+      }
     }
   }
 

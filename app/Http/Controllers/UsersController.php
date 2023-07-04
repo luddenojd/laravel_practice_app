@@ -69,19 +69,18 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Validate the request data
         $request->validate([
             'name' => 'string|max:255',
             'email' => 'email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'bg_color' => 'nullable|string|max:7', // Assuming you are using HEX color code
-            'font_color' => 'nullable|string|max:7', // Assuming you are using HEX color code
+            'bg_color' => 'nullable|string|max:7',
+            'font_color' => 'nullable|string|max:7',
             'birthdate' => 'nullable|date',
             'description' => 'nullable|string',
         ]);
 
-        // Update user information (name, email, password, etc.)
+
         $user->fill($request->only([
             'name',
             'email',
@@ -92,9 +91,7 @@ class UsersController extends Controller
             'description',
         ]));
 
-        // Handle profile picture update
         if ($request->hasFile('profile_pic')) {
-            // Delete the old profile picture if exists
             if ($user->profile_pic) {
                 Storage::disk('public')->delete($user->profile_pic);
             }

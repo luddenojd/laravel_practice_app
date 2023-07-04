@@ -5,12 +5,17 @@ import Logout from './Logout'
 import Login from './Login'
 import ClipLoader from "react-spinners/ClipLoader"
 import MyProfile from './MyProfile'
+import AlertMessage from './AlertMessage'
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
+  const [alert, setAlert] = useState(false)
+  const [bgColor, setBgColor] = useState(user.bg_color)
+
+  const message = 'Dina ändringar har sparats!'
 
   const getAuthenticatedContent = async () => {
     const token = getToken()
@@ -57,6 +62,7 @@ const LandingPage = () => {
     getAuthenticatedContent()
   }, [])
 
+
   useEffect(() => {
     const token = getToken()
     if(token) {
@@ -66,32 +72,34 @@ const LandingPage = () => {
     }
   }, [])
 
+
   return (
-    <div className="landingpage-wrapper">
+    <div style={{background: bgColor}} className="landingpage-wrapper">
       {loggedIn ?
       <>
-
       {loading ? <ClipLoader />
       :
-      <div className="movie-profile-wrapper">
-      <MyProfile user={user} />
-      <div className="movies-container">
-      {/* {movies.length
-      ?
-      <h4>Mina filmer</h4>
-      :
-      <p>Du har inga filmer att visa för tillfället.</p>
-      } */}
-      {movies?.map((movie) => (
-        <Movie
-        key={movie.id}
-        movie={movie}
-        user={user}
-        setMovies={setMovies}
-         />
+        <div className="movie-profile-wrapper">
+        {alert &&
+          <AlertMessage message={message} />
+        }
+        <MyProfile
+          setAlert={setAlert}
+          user={user}
+          setBgColor={setBgColor}
+          bgColor={bgColor}
+        />
+        <div className="movies-container">
+        {movies?.map((movie) => (
+          <Movie
+          key={movie.id}
+          movie={movie}
+          user={user}
+          setMovies={setMovies}
+          />
       ))}
-      </div>
-      </div>
+        </div>
+        </div>
       }
 
       </>
@@ -99,7 +107,6 @@ const LandingPage = () => {
       <>
         <p>Välkommen till filmdatabasen!</p>
         <p>Var vänlig logga in eller skapa ett konto för att ta del av innehållet.</p>
-
         <Login />
       </>
       }
