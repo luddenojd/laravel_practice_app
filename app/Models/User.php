@@ -29,12 +29,16 @@ class User extends Authenticatable implements MustVerifyEmail
             ->wherePivot('status', 'pending');
     }
 
+    public function conversation()
+    {
+        return $this->belongsToMany(User::class, 'conversations', 'user_id', 'receiver_id');
+    }
+
     public function getProfilePictureUrlAttribute()
     {
         if ($this->profile_pic) {
             return asset('storage/' . $this->profile_pic);
         }
-        // Return a default profile picture URL if no picture is set
         return asset('path/to/default/profile-picture.jpg');
     }
 

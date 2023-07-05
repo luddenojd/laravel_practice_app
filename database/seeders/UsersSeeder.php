@@ -14,8 +14,7 @@ class UsersSeeder extends Seeder
           'name' => 'Elsa Andersson',
           'email' => 'elsa@example.com',
           'password' => bcrypt('password123'),
-          'bg_color' => 'white',
-          'font_color' => 'black',
+          'bg_color' => '#FFFFFF',
           'birthdate' => '1995-05-23',
           'description' => 'Om mig'
       ],
@@ -23,8 +22,7 @@ class UsersSeeder extends Seeder
           'name' => 'Liam Eriksson',
           'email' => 'liam@example.com',
           'password' => bcrypt('password123'),
-          'bg_color' => 'white',
-          'font_color' => 'black',
+          'bg_color' => '#FFFFFF',
           'birthdate' => '1995-05-23',
           'description' => 'Om mig'
       ],
@@ -32,8 +30,7 @@ class UsersSeeder extends Seeder
           'name' => 'Saga Lindgren',
           'email' => 'saga@example.com',
           'password' => bcrypt('password123'),
-          'bg_color' => 'white',
-          'font_color' => 'black',
+          'bg_color' => '#FFFFFF',
           'birthdate' => '1995-05-23',
           'description' => 'Om mig'
       ],
@@ -41,8 +38,7 @@ class UsersSeeder extends Seeder
           'name' => 'Oscar Nilsson',
           'email' => 'oscar@example.com',
           'password' => bcrypt('password123'),
-          'bg_color' => 'white',
-          'font_color' => 'black',
+          'bg_color' => '#FFFFFF',
           'birthdate' => '1995-05-23',
           'description' => 'Om mig'
       ],
@@ -50,8 +46,7 @@ class UsersSeeder extends Seeder
           'name' => 'Ella Svensson',
           'email' => 'ella@example.com',
           'password' => bcrypt('password123'),
-          'bg_color' => 'white',
-          'font_color' => 'black',
+          'bg_color' => '#FFFFFF',
           'birthdate' => '1995-05-23',
           'description' => 'Om mig'
       ],

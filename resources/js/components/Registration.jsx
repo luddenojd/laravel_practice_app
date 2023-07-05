@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import AlertMessage from './AlertMessage'
 
 const Registration = () => {
 
@@ -63,7 +64,7 @@ const Registration = () => {
     <div className="registration-form">
       {userCreated
       ?
-      <p>Användare skapad!</p>
+      <AlertMessage message={'Användare skapad!'} />
       :
       <>
               <div>

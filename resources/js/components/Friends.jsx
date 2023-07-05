@@ -56,7 +56,7 @@ const Friends = () => {
               <p key={friend.id}>{friend.name}</p>
             </button>
           ))}
-          <FriendRequests  />
+          <FriendRequests getMyFriends={getMyFriends} />
         </>
       )}
     </div>

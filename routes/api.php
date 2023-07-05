@@ -9,6 +9,7 @@ use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ConversationController;
 
 //Public routes
 Route::middleware('api')->post('/login', function (Request $request) {
@@ -81,6 +82,11 @@ Route::middleware('api')->post('/login', function (Request $request) {
     Route::get('/friends', [FriendsController::class, 'index']);
     Route::get('/myFriends', [FriendsController::class, 'myFriends']);
     Route::get('/myFriendRequests', [FriendsController::class, 'myFriendRequests']);
+
+    //Messages
+    Route::get('/messages', [ConversationController::class, 'index']);
+    Route::post('/sendmessage', [ConversationController::class, 'sendMessage']);
+    Route::post('/readmessage', [ConversationController::class, 'readMessage']);
 
     //Search
     Route::get('/search', [SearchController::class, 'search']);

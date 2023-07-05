@@ -29,8 +29,6 @@ const Menu = () => {
       } catch (error) {
         console.log(error)
       }
-    } else {
-      console.log('Token not found')
     }
   }
 

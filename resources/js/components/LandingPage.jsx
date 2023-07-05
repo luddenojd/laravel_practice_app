@@ -34,8 +34,6 @@ const LandingPage = () => {
       } finally {
         setLoading(false)
       }
-    } else {
-      console.log('Token not found')
     }
   }
 

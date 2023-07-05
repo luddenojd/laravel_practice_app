@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('profile_pic')->nullable();
-            $table->string('bg_color');
-            $table->string('font_color');
-            $table->string('birthdate');
-            $table->longText('description');
+            $table->string('bg_color')->default('#FFFFFF');
+            $table->string('birthdate')->default('Fyll i ditt födelsedatum');
+            $table->string('description')->default('Om mig');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

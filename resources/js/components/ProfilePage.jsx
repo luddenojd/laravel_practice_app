@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const ProfilePage = ({ user, setProfile, activeUser }) => {
   const [addedFriend, setAddedFriend] = useState(false)
-  const [status, setStatus] = useState([])
   const [friendRequests, setFriendRequests] = useState([])
 
   const getToken = () => {
@@ -22,12 +21,13 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
             Authorization: `Bearer ${token}`
           }
         })
-        setFriendRequests(response.data)
+        setFriendRequests(response.data.filter((curr) => curr.friend_id === user.id))
       } catch (error) {
         console.log(error)
       }
     }
   }
+
 
 
   const sendFriendRequest = async (id) => {
@@ -52,40 +52,25 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
 
   useEffect(() => {
     getFriendRequests()
-    getCorrectStatus()
   }, [])
 
-  const getCorrectStatus = async () => {
-    try {
-      console.log(friendRequests)
-        const temp = await friendRequests.filter((curr) => curr.user_id === user.id)
-      if (temp.length > 0) {
-        setStatus(temp.map((item) => item.status))
-      } else {
-        setStatus([]);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error)
-    }
-  }
   return (
     <>
       <div style={{background: user.bg_color}} className="profile-wrapper">
-        {/* <IconContext.Provider value={{ color: "#495057", size: "50px" }}>
-          <AiOutlineUser />
-        </IconContext.Provider> */}
         <div className="back-button-container">
         <button onClick={() => setProfile(false)}>
         <IconContext.Provider value={{ color: "#495057", size: "25px" }}>
           <AiOutlineArrowLeft />
-          <p className="back-info">Tillbaka till vänner</p>
+          <p className="back-info">Alla användare</p>
         </IconContext.Provider>
         </button>
       </div>
         <img className="profile-pic" src={`storage/${user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png'}`} alt="" />
         <p>{user.name}</p>
-        <p>E-mail: {user.email}</p>
-        {addedFriend || status.includes('pending')
+        <p>{user.birthdate}</p>
+        <p>{user.email}</p>
+        <p>{user.description}</p>
+        {addedFriend || friendRequests[0]?.status === 'pending'
         ?
         <p>Vänförfrågan har skickats!</p>
         :

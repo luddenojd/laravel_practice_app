@@ -64,6 +64,7 @@ const Users = () => {
             Authorization: `Bearer ${token}`
           }
         })
+        console.log(response)
       } catch (error) {
         console.log(error)
       }
