@@ -1,0 +1,30 @@
+.chatbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+  .my-message {
+    min-height: 35px;
+    width: 70%;
+    padding: 8px;
+    background: blue;
+    color: white;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    margin-left: 70px;
+    &.sender {
+      background: green;
+      color: white;
+      margin-left: 0px;
+    }
+  }
+}
+
+.input-area {
+  display: flex;
+  input {
+    width: 200px;
+    height: 35px;
+  }
+}

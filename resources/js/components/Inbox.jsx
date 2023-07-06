@@ -15,6 +15,27 @@ const Inbox = () => {
     return localStorage.getItem('token')
   }
 
+
+  const readMessage = async (id) => {
+    const token = getToken()
+    if(token) {
+      try {
+        const response = await axios.post(`http://localhost:8000/api/readmessage`, {
+          is_read: true,
+          message_id: id
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   const getActiveUser = async () => {
     const token = getToken()
     if(token) {
@@ -66,6 +87,7 @@ const Inbox = () => {
   const openMessage = (message) => {
     setConvo(message)
     setOpen(true)
+    readMessage(message.id)
   }
 
 
@@ -92,7 +114,11 @@ const Inbox = () => {
         }
         </>
       ))}
-      <ChatBox activeUser={activeUser} messages={messages} convo={convo} />
+      <ChatBox
+        activeUser={activeUser}
+        messages={messages}
+        convo={convo}
+      />
     </div>
   )
 }
