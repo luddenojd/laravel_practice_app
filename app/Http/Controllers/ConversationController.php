@@ -15,7 +15,10 @@ class ConversationController extends Controller
       $conversations = Conversation::whereHas('user', function ($query) use ($user) {
           $query->where('user_id', $user->id)
           ->orWhere('receiver_id', $user->id);
-      })->get();
+      })
+      ->join('users', 'conversations.user_id', '=', 'users.id')
+      ->select('conversations.*', 'users.name as sender_name')
+      ->get();
 
       return response()->json($conversations);
   }

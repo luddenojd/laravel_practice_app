@@ -4,6 +4,7 @@ import ClipLoader from "react-spinners/ClipLoader"
 import { BsImageFill } from 'react-icons/bs'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { IconContext } from "react-icons"
+import Inbox from './Inbox'
 
 
 const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
@@ -137,7 +138,7 @@ const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
 
   return (
     <div className="my-profile-wrapper">
-      {loading
+      {/* {loading
         ?
         <ClipLoader />
         :
@@ -241,7 +242,8 @@ const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
       <button onClick={updateInfo}>
         <p>Spara bakgrundsfärg</p>
       </button>
-      </div>
+      </div> */}
+      <Inbox />
     </div>
   )
 }

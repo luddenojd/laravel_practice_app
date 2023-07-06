@@ -1,0 +1,20 @@
+.inbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 10px;
+  .loading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .inbox-message {
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid grey;
+    &.read {
+      font-weight: lighter;
+    }
+  }
+}
