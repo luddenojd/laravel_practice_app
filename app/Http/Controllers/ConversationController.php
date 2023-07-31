@@ -35,7 +35,16 @@ class ConversationController extends Controller
     $new_message->message = $message;
     $new_message->save();
 
-    return response()->json($new_message);
+    $conversations = Conversation::whereHas('user', function ($query) use ($user) {
+        $query->where('user_id', $user->id)
+        ->orWhere('receiver_id', $user->id);
+    })
+    ->join('users', 'conversations.user_id', '=', 'users.id')
+    ->select('conversations.*', 'users.name as sender_name')
+    ->orderBy('created_at', 'asc')
+    ->get();
+
+    return response()->json($conversations);
 
   }
 

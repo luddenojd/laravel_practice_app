@@ -67,7 +67,7 @@ const Registration = () => {
       <AlertMessage message={'Användare skapad!'} />
       :
       <>
-              <div>
+      <div>
         <p>Namn:</p>
         <input
           onChange={(e) => setName(e.target.value)}
@@ -105,7 +105,7 @@ const Registration = () => {
       }
 
     </div>
-  );
-};
+  )
+}
 
 export default Registration

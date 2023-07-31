@@ -77,9 +77,9 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
         !user.friends
         ?
         <button onClick={() => sendFriendRequest(user.id)}>
-        <AiOutlineUserAdd />
-        <p>Skicka vänförfrågan till {user.name}?</p>
-      </button>
+          <AiOutlineUserAdd />
+          <p>Skicka vänförfrågan till {user.name}?</p>
+        </button>
       :
       <p>Ni är vänner!</p> }
       </div>

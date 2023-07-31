@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const ChatBox = ({ convo, messages, activeUser }) => {
   const [conversation, setConversation] = useState([])
+  const [message, setMessage] = useState('')
+
+  let inputRef = useRef()
+
+  const getToken = () => {
+    return localStorage.getItem('token')
+  }
 
   const filterMessages = () => {
     let temp = messages
@@ -18,22 +25,56 @@ const ChatBox = ({ convo, messages, activeUser }) => {
     setConversation(temp)
   }
 
+  const handleKey = (e) => {
+    if(e.key === "Enter") {
+      sendMessage()
+    }
+  }
+
+  const sendMessage = async () => {
+    const token = getToken()
+    if(token) {
+      try {
+        const response = await axios.post(`http://localhost:8000/api/sendmessage`, {
+          receiver_id: convo.user_id,
+          message: message
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setConversation(response.data)
+        setMessage('')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   useEffect(() => {
     filterMessages()
   }, [convo])
+
 
   return (
     <>
     <div className="chatbox-wrapper">
       {conversation?.map((curr) => (
         <div>
-        <p className={curr.receiver_id === activeUser.id ? "my-message" : "my-message sender"}>{curr.message}</p>
+        <p className={curr.receiver_id === activeUser.id ? "my-message sender" : "my-message"}>{curr.message}</p>
         </div>
       ))}
     </div>
     <div className="input-area">
-        <input type="text" />
-        <button>Skicka</button>
+      <input
+        value={message}
+        onKeyDown={(e) => handleKey(e)}
+        onChange={(e) => setMessage(e.target.value)}
+        type="text"
+      />
+      <button onClick={sendMessage}>Skicka</button>
     </div>
     </>
   )

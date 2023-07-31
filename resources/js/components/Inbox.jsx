@@ -15,7 +15,6 @@ const Inbox = () => {
     return localStorage.getItem('token')
   }
 
-
   const readMessage = async (id) => {
     const token = getToken()
     if(token) {
@@ -89,7 +88,6 @@ const Inbox = () => {
     setOpen(true)
     readMessage(message.id)
   }
-
 
   useEffect(() => {
     getActiveUser()
