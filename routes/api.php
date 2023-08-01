@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorsController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\DirectorsController;
 use App\Http\Controllers\FriendsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\GenresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PostsController;
 
 //Public routes
@@ -95,4 +97,12 @@ Route::middleware('api')->post('/login', function (Request $request) {
     //Posts
     Route::get('/posts', [PostsController::class, 'index']);
     Route::post('/posts', [PostsController::class, 'store']);
+
+    //Likes
+    Route::get('/likes', [LikesController::class, 'index']);
+    Route::post('/likes', [LikesController::class, 'store']);
+
+    //Comments
+    Route::get('/comments', [CommentsController::class, 'index']);
+    Route::post('/comments', [CommentsController::class, 'store']);
 });

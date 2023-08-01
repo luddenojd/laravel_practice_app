@@ -10,15 +10,18 @@ class PostsController extends Controller
 {
     public function index()
     {
-       $posts = Posts::all();
+        $posts = Posts::with(['user', 'likes', 'comments'])
+        ->orderByDesc('created_at')
+        ->get();
 
-       return response()->json($posts);
+        return response()->json($posts);
     }
 
     public function store(Request $request)
     {
         $post = new Posts();
         $post->content = $request->input('content');
+        $post->user_id = $request->input('user_id');
 
         if ($request->hasFile('image')) {
             if ($post->image) {
