@@ -28,8 +28,6 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
     }
   }
 
-
-
   const sendFriendRequest = async (id) => {
     const token = getToken()
     if(token) {
@@ -70,6 +68,9 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
         <p>{user.birthdate}</p>
         <p>{user.email}</p>
         <p>{user.description}</p>
+        <button>
+          <p>Skicka meddelande till {user.name}</p>
+        </button>
         {addedFriend || friendRequests[0]?.status === 'pending'
         ?
         <p>Vänförfrågan har skickats!</p>

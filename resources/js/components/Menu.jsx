@@ -57,9 +57,10 @@ const Menu = () => {
            }
             </Link>
             <Link className="route-links" to="/">{userName}</Link>
-            <Link className="route-links" to="/allafilmer">Alla filmer</Link>
-            <Link className="route-links" to="/anvandare">Alla användare</Link>
-            <Link className="route-links" to="/vanner">Mina vänner</Link>
+            <Link className="route-links" to="/allafilmer">Filmer</Link>
+            <Link className="route-links" to="/anvandare">Användare</Link>
+            <Link className="route-links" to="/vanner">Vänner</Link>
+            <Link className="route-links" to="/inbox">Inkorg</Link>
            <Logout />
            </>
            :

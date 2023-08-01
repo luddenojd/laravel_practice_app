@@ -138,7 +138,7 @@ const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
 
   return (
     <div className="my-profile-wrapper">
-      {/* {loading
+      {loading
         ?
         <ClipLoader />
         :
@@ -242,8 +242,8 @@ const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
       <button onClick={updateInfo}>
         <p>Spara bakgrundsfärg</p>
       </button>
-      </div> */}
-      <Inbox />
+      </div>
+      {/* <Inbox /> */}
     </div>
   )
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\GenresController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\PostsController;
 
 //Public routes
 Route::middleware('api')->post('/login', function (Request $request) {
@@ -90,4 +91,8 @@ Route::middleware('api')->post('/login', function (Request $request) {
 
     //Search
     Route::get('/search', [SearchController::class, 'search']);
+
+    //Posts
+    Route::get('/posts', [PostsController::class, 'index']);
+    Route::post('/posts', [PostsController::class, 'store']);
 });

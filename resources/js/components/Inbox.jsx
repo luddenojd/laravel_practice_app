@@ -105,18 +105,19 @@ const Inbox = () => {
       :
       filteredMessages.map((message) => (
         <>
-        {activeUser.id !== message.user_id &&
-        <div onClick={() => openMessage(message)} key={message.id} className={message.is_read ? "inbox-message read" : "inbox-message"}>
-          <p>{message.sender_name}</p>
-        </div>
-        }
+          {activeUser.id !== message.user_id &&
+          <div onClick={() => openMessage(message)} key={message.id} className={message.is_read ? "inbox-message read" : "inbox-message"}>
+            <p>{message.sender_name}</p>
+          </div>
+          }
         </>
       ))}
       <ChatBox
-        activeUser={activeUser}
-        messages={messages}
-        convo={convo}
+      activeUser={activeUser}
+      messages={messages}
+      convo={convo}
       />
+
     </div>
   )
 }

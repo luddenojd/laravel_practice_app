@@ -63,7 +63,8 @@ const Users = () => {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        })
+        }
+        )
         console.log(response)
       } catch (error) {
         console.log(error)

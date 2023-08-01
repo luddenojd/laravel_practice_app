@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const ChatBox = ({ convo, messages, activeUser }) => {
   const [conversation, setConversation] = useState([])
   const [message, setMessage] = useState('')
-
-  let inputRef = useRef()
 
   const getToken = () => {
     return localStorage.getItem('token')

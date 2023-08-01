@@ -7,6 +7,7 @@ import Login from './Login'
 import AllMovies from './AllMovies'
 import Friends from './Friends'
 import Users from './Users'
+import Inbox from './Inbox'
 import {
   createBrowserRouter,
   Link,
@@ -32,7 +33,8 @@ function App() {
         { element: <Login />, path: '/loggain'},
         { element: <AllMovies />, path: '/allafilmer'},
         { element: <Friends />, path: '/vanner'},
-        { element: <Users />, path: '/anvandare'}
+        { element: <Users />, path: '/anvandare'},
+        { element: <Inbox />, path: '/inbox'}
       ],
       element: <Root />
     }
