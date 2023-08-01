@@ -6,6 +6,7 @@ import Login from './Login'
 import ClipLoader from "react-spinners/ClipLoader"
 import MyProfile from './MyProfile'
 import AlertMessage from './AlertMessage'
+import TimeLine from './TimeLine'
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([])
@@ -24,9 +25,9 @@ const LandingPage = () => {
         const response = await axios.get('http://localhost:8000/api/movies', {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
           },
-        });
+        })
         setMovies(response.data.movies)
         setUser(response.data.user)
       } catch (error) {
@@ -81,12 +82,13 @@ const LandingPage = () => {
         {alert &&
           <AlertMessage message={message} />
         }
-        <MyProfile
+        {/* <MyProfile
           setAlert={setAlert}
           user={user}
           setBgColor={setBgColor}
           bgColor={bgColor}
-        />
+        /> */}
+        <TimeLine />
         <div className="movies-container">
         {movies?.map((movie) => (
           <Movie
