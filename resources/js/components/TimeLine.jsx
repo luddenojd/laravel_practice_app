@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post'
+import NewPost from './NewPost'
 
 const TimeLine = () => {
   const [posts, setPosts] = useState([])
@@ -18,7 +19,6 @@ const TimeLine = () => {
             Authorization: `Bearer ${token}`
           }
         })
-        console.log(response)
         setPosts(response.data)
       } catch (error) {
 
@@ -31,7 +31,8 @@ const TimeLine = () => {
   }, [])
 
   return (
-    <div>
+    <div className="timeline-wrapper">
+      <NewPost />
       {posts?.map((post) => (
         <Post
         key={post.id}
