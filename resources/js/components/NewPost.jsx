@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { IconContext } from "react-icons"
 import CreateNewPost from './CreateNewPost'
 
-const NewPost = () => {
+const NewPost = ({open, setOpen}) => {
   const [content, setContent] = useState('')
-  const [open, setOpen] = useState(false)
 
   return (
     <div className="new-post-wrapper">
@@ -17,7 +16,6 @@ const NewPost = () => {
         &&
         <CreateNewPost setOpen={setOpen} />
       }
-
     </div>
   )
 }

@@ -22,10 +22,9 @@ const Logout = () => {
   }
 
   return (
-    <div>
+    <div className="logout-wrapper">
       <button onClick={handleLogout} className="logout-button">
-        <h1>Logga ut</h1>
-        <IconContext.Provider value={{ color: "white", size: "25px" }}>
+        <IconContext.Provider value={{ color: "white", size: "40px" }}>
           <AiOutlineLogout />
         </IconContext.Provider>
       </button>

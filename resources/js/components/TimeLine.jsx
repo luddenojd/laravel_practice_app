@@ -4,6 +4,7 @@ import NewPost from './NewPost'
 
 const TimeLine = () => {
   const [posts, setPosts] = useState([])
+  const [open, setOpen] = useState(false)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -28,11 +29,14 @@ const TimeLine = () => {
 
   useEffect(() => {
     getPosts()
-  }, [])
+  }, [open])
 
   return (
     <div className="timeline-wrapper">
-      <NewPost />
+      <NewPost
+      open={open}
+      setOpen={setOpen}
+      />
       {posts?.map((post) => (
         <Post
         key={post.id}

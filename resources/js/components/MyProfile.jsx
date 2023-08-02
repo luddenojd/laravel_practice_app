@@ -45,7 +45,7 @@ const MyProfile = ({ user, setAlert, setBgColor, bgColor }) => {
         setName(response.data.name)
         setBirthdate(response.data.birthdate)
         setDescription(response.data.description)
-        setBgColor(response.data.description)
+        setBgColor(response.data.bg_color)
         setEditName(false)
         setEditAge(false)
         setEditDesc(false)

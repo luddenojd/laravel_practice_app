@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import {
+  AiOutlineHome,
+  AiOutlineUsergroupAdd,
+  AiOutlineMessage,
+  AiOutlineUser
+        } from 'react-icons/ai'
 import { GrClose } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import Logout from './Logout'
@@ -75,23 +81,29 @@ const Menu = () => {
            </>
            }
       </div>
-      {isOpen
-          ?
         <div className="main-menu">
-          <div className="closing-wrapper">
-            <IconContext.Provider value={{ color: "#495057", size: "40px" }}>
-            <button onClick={() => setIsOpen(!isOpen)} >
-              <GrClose />
-            </button>
-            </IconContext.Provider>
-          </div>
-
-
           {loggedIn ?
           <>
-            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">Mina filmer</Link>
-            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/allafilmer">Alla filmer</Link>
-            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/vanner">Mina vänner</Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/">
+            <IconContext.Provider value={{ color: "white", size: "40px", }}>
+              <AiOutlineHome />
+            </IconContext.Provider>
+            </Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/anvandare">
+            <IconContext.Provider value={{ color: "white", size: "40px", }}>
+              <AiOutlineUsergroupAdd />
+            </IconContext.Provider>
+            </Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/inbox">
+            <IconContext.Provider value={{ color: "white", size: "40px", }}>
+              <AiOutlineMessage />
+            </IconContext.Provider>
+            </Link>
+            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/inbox">
+            <IconContext.Provider value={{ color: "white", size: "40px", }}>
+              <AiOutlineUser />
+            </IconContext.Provider>
+            </Link>
            <Logout />
            </>
            :
@@ -100,16 +112,7 @@ const Menu = () => {
            <Link onClick={() => setIsOpen(!isOpen)} className="route-links" to="/loggain">Logga in</Link>
            </>
            }
-
         </div>
-          :
-          <IconContext.Provider value={{ color: "#495057", size: "40px", className: "global-class-name" }}>
-        <button className="burger-menu" onClick={() => setIsOpen(!isOpen)}>
-          <GiHamburgerMenu />
-        </button>
-</IconContext.Provider>
-
-      }
     </div>
   )
 }
