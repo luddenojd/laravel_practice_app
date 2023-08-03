@@ -10,7 +10,9 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Posts::with(['user', 'likes', 'comments'])
+        $posts = Posts::with(['user', 'likes', 'comments' => function ($query) {
+            $query->with('user');
+        }])
         ->orderByDesc('created_at')
         ->get();
 

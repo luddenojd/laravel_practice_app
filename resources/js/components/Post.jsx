@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 import { IconContext } from "react-icons"
+import Comments from './Comments'
 
 const Post = ({post, activeUser, setIsLiked, isLiked}) => {
   const [hasLiked, setHasLiked] = useState(false)
+  const [openComments, setOpenComments] = useState(false)
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -66,13 +68,22 @@ const Post = ({post, activeUser, setIsLiked, isLiked}) => {
           </IconContext.Provider>
           <p style={{ color: hasLiked ? "blue" : "inherit" }} >Gilla</p>
         </button>
-        <button>
+        <button onClick={() => setOpenComments(!openComments)}>
           <IconContext.Provider value={{ size: "20px" }}>
               <AiOutlineComment />
           </IconContext.Provider>
           <p>Kommentera</p>
         </button>
       </div>
+      {openComments &&
+        <Comments
+          post={post}
+          activeUser={activeUser}
+          comments={post.comments}
+          openComments={openComments}
+          setOpenComments={setOpenComments}
+        />
+      }
     </div>
   )
 }

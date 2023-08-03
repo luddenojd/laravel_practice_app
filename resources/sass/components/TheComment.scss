@@ -1,0 +1,19 @@
+.the-comment-wrapper {
+  display: flex;
+  padding: 10px;
+  img {
+    margin-right: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+  }
+  .comment-section {
+    padding: 7px;
+    background: rgb(203, 203, 203);
+    border-radius: 6px;
+    .comment-name {
+      font-weight: bold;
+    }
+  }
+}
