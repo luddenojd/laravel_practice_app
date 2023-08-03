@@ -3,7 +3,7 @@ import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 import { IconContext } from "react-icons"
 import Comments from './Comments'
 
-const Post = ({post, activeUser, setIsLiked, isLiked}) => {
+const Post = ({post, activeUser, setIsLiked, isLiked, setIsCommented, isCommented}) => {
   const [hasLiked, setHasLiked] = useState(false)
   const [openComments, setOpenComments] = useState(false)
 
@@ -82,6 +82,8 @@ const Post = ({post, activeUser, setIsLiked, isLiked}) => {
           comments={post.comments}
           openComments={openComments}
           setOpenComments={setOpenComments}
+          setIsCommented={setIsCommented}
+          isCommented={isCommented}
         />
       }
     </div>

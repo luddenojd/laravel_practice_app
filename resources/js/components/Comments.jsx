@@ -3,7 +3,7 @@ import TheComment from './TheComment'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { IconContext } from "react-icons"
 
-const Comments = ({ comments, activeUser, post, openComments, setOpenComments }) => {
+const Comments = ({ comments, activeUser, post, openComments, setOpenComments, setIsCommented, isCommented }) => {
   const [newComment, setNewComment] = useState('')
 
   const getToken = () => {
@@ -25,6 +25,8 @@ const Comments = ({ comments, activeUser, post, openComments, setOpenComments })
             Authorization: `Bearer ${token}`
           }
         })
+        setNewComment("")
+        setIsCommented(!isCommented)
       } catch (error) {
 
       }
@@ -57,6 +59,7 @@ const Comments = ({ comments, activeUser, post, openComments, setOpenComments })
       <div className="comment-input-wrapper">
         <input
         type="text"
+        value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
         onKeyDown={(e) => handleKey(e)}                placeholder="Skriv en kommentar"
         />

@@ -1,46 +1,36 @@
-.back-button-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-top: 20px;
-  margin-left: 20px;
-  button {
-    .back-info {
-      display: none;
-    }
-  }
-}
-
 .profile-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 100vh;
+  position: fixed;
   width: 100vw;
-  .profile-pic {
-    max-width: 250px;
-    max-height: 250px;
-  }
-  button {
-    display: flex;
-    align-items: center;
-    p {
-      margin-left: 10px;
-    }
-  }
-}
-
-@media screen and (min-width:768px) {
+  height: 100vh;
+  top: 0;
+  background-color: white;
+  z-index: 2;
   .back-button-container {
-    button {
+    padding: 5px;
+  }
+  img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 5px;
+  }
+  .user-name {
+    font-weight: bold;
+    padding: 5px;
+  }
+  .buttons-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    .friend-button {
       display: flex;
+      justify-content: space-evenly;
       align-items: center;
-      .back-info {
-        display: block;
-        font-size: 14px;
-        margin-left: 10px;
-      }
+      width: 120px;
+      height: 30px;
+      border-radius: 6px;
+      background: blue;
+      color: white;
     }
   }
 }

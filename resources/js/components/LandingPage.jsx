@@ -76,8 +76,6 @@ const LandingPage = () => {
     <div style={{background: bgColor}} className="landingpage-wrapper">
       {loggedIn ?
       <>
-      {loading ? <ClipLoader />
-      :
         <div className="movie-profile-wrapper">
         {alert &&
           <AlertMessage message={message} />
@@ -89,7 +87,7 @@ const LandingPage = () => {
           bgColor={bgColor}
         /> */}
         <TimeLine />
-        <div className="movies-container">
+        {/* <div className="movies-container">
         {movies?.map((movie) => (
           <Movie
           key={movie.id}
@@ -98,10 +96,8 @@ const LandingPage = () => {
           setMovies={setMovies}
           />
       ))}
+        </div> */}
         </div>
-        </div>
-      }
-
       </>
       :
       <>

@@ -53,38 +53,37 @@ const ProfilePage = ({ user, setProfile, activeUser }) => {
   }, [])
 
   return (
-    <>
       <div style={{background: user.bg_color}} className="profile-wrapper">
         <div className="back-button-container">
         <button onClick={() => setProfile(false)}>
         <IconContext.Provider value={{ color: "#495057", size: "25px" }}>
           <AiOutlineArrowLeft />
-          <p className="back-info">Alla användare</p>
         </IconContext.Provider>
         </button>
       </div>
         <img className="profile-pic" src={`storage/${user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png'}`} alt="" />
-        <p>{user.name}</p>
+        <p className="user-name">{user.name}</p>
+        <div className="buttons-wrapper">
+          <button>
+            <p>Meddelande</p>
+          </button>
+          {/* {addedFriend || friendRequests[0]?.status === 'pending'
+          ?
+          <p>Vänförfrågan skickad!</p>
+          :
+          !user.friends
+          ? */}
+          <button className="friend-button" onClick={() => sendFriendRequest(user.id)}>
+            <AiOutlineUserAdd />
+            <p>{addedFriend || friendRequests[0]?.status === 'pending' ? 'Skickad' : !user.friends ? 'Lägg till vän' : 'Vänner'}</p>
+          </button>
+        {/* // :
+        // <p>Vänner!</p> } */}
+        </div>
         <p>{user.birthdate}</p>
         <p>{user.email}</p>
         <p>{user.description}</p>
-        <button>
-          <p>Skicka meddelande till {user.name}</p>
-        </button>
-        {addedFriend || friendRequests[0]?.status === 'pending'
-        ?
-        <p>Vänförfrågan har skickats!</p>
-        :
-        !user.friends
-        ?
-        <button onClick={() => sendFriendRequest(user.id)}>
-          <AiOutlineUserAdd />
-          <p>Skicka vänförfrågan till {user.name}?</p>
-        </button>
-      :
-      <p>Ni är vänner!</p> }
       </div>
-    </>
   )
 }
 

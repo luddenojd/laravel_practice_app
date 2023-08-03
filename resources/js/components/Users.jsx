@@ -32,7 +32,6 @@ const Users = () => {
     }
   }
 
-
   const getAllUsers = async () => {
     const token = getToken()
     if(token) {
@@ -86,6 +85,24 @@ const Users = () => {
     <div className="allusers-wrapper">
       {loading
       ?
+      <div className="loading-wrapper">
+        <ClipLoader />
+      </div>
+      :
+      profile
+      ?
+      <ProfilePage setProfile={setProfile} user={user} activeUser={activeUser} />
+      :
+      users?.map((user) => (
+        <button onClick={() => showProfile(user)} className="the-user-info">
+          <img src={`storage/${user.profile_pic ? user.profile_pic : 'profile_pictures/noimage.png'}`} alt="" />
+          <p>{user.name}</p>
+        </button>
+      ))
+      }
+
+      {/* {loading
+      ?
       <ClipLoader />
       :
       profile
@@ -93,7 +110,6 @@ const Users = () => {
       <ProfilePage setProfile={setProfile} user={user} activeUser={activeUser} />
       :
       <div className="button-wrapper">
-      <p>Användare:</p>
       {users?.map((user) => (
         <button onClick={() => showProfile(user)}>
           <AiOutlineUser />
@@ -101,8 +117,7 @@ const Users = () => {
         </button>
       ))}
       </div>
-      }
-
+      } */}
     </div>
   )
 }
