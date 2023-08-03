@@ -31,7 +31,7 @@ class LikesController extends Controller
             $like->post_id = $post_id;
             $like->user_id = $user_id;
             $like->save();
-            return response()->json(['message' => 'Like added']);
+            return response()->json($like);
         }
     }
 

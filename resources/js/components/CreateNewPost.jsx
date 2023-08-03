@@ -24,9 +24,7 @@ const CreateNewPost = ({ setOpen }) => {
       reader.readAsDataURL(file)
     }
     setImageFile(file)
-    console.log(file)
   }
-  console.log(imageFile)
 
   const getActiveUser = async () => {
     const token = getToken()
@@ -35,7 +33,7 @@ const CreateNewPost = ({ setOpen }) => {
         const response = await axios.get('http://localhost:8000/api/activeuser', {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
           },
         })
         setActiveUser(response.data)
